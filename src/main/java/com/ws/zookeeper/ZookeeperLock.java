@@ -45,7 +45,6 @@ public class ZookeeperLock implements Lock{
             public void handleDataChange(String dataPath, Object data) throws Exception {
 
             }
-
             @Override
             public void handleDataDeleted(String dataPath) throws Exception {
                 logger.info("===============get data delete event==================");
