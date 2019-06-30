@@ -11,10 +11,17 @@
         <mybatis.version>3.2.1</mybatis.version>
         <mybatis-spring.version>1.2.0</mybatis-spring.version>
         <aspectj.version>1.8.5</aspectj.version>
-        <druid-version>1.0.25</druid-version>
+        <druid.version>1.0.25</druid.version>
+        <zkclient.version>0.11</zkclient.version>
     </properties>
 
     <dependencies>
+        <!-- zkclient -->
+        <dependency>
+            <groupId>com.101tec</groupId>
+            <artifactId>zkclient</artifactId>
+            <version>${zkclient.version}</version>
+        </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -39,7 +46,7 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
-            <version>${druid-version}</version>
+            <version>${druid.version}</version>
         </dependency>
         <!-- AspectJ -->
         <dependency>
