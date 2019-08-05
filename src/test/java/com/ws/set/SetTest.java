@@ -1,0 +1,39 @@
+package com.ws.set;
+
+import junit.framework.TestCase;
+import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+/**
+ * @author yunhua
+ * @since 2019-08-05
+ */
+public class SetTest extends TestCase {
+
+    @Test
+    public void test(){
+        List<Long> itemIds = new ArrayList<Long>() ;
+        itemIds.add(1L) ;
+        itemIds.add(2L) ;
+        itemIds.add(4L) ;
+        itemIds.add(4L) ;
+
+
+        Set<String> itemIdSet = new HashSet<String>();
+        itemIds.forEach(t -> itemIdSet.add(String.valueOf(t)));
+
+        for(String a :itemIdSet){
+            System.out.printf(a+",");
+        }
+
+        List<String> itemIdList = new ArrayList<>(itemIdSet) ;
+        for(String a :itemIdList){
+            System.out.printf(a+",");
+        }
+    }
+
+}
