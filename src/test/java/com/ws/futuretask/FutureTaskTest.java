@@ -18,7 +18,9 @@ public class FutureTaskTest {
     public void test() {
         //第一种方式
         ExecutorService executor = Executors.newCachedThreadPool();
-        Task task = new Task();
+        UserService userService = new UserService();
+        userService.setName("kevan");
+        MyTask task = new MyTask(userService);
         FutureTask<Integer> futureTask = new FutureTask<>(task);
         executor.submit(futureTask);
         executor.shutdown();
@@ -48,13 +50,23 @@ public class FutureTaskTest {
         System.out.println("所有任务执行完毕");
     }
 
-    class Task implements Callable<Integer> {
+    class MyTask implements Callable<Integer> {
+
+        private UserService userService;
+
+        //多线程不能使用spring注入，必须构造方法传
+        public MyTask(UserService userService) {
+            this.userService = userService;
+        }
+
+
         @Override
         public Integer call() throws Exception {
+            System.out.println(userService.getName());
             System.out.println("子线程在进行计算");
             Thread.sleep(3000);
             int sum = 0;
-            for(int i=0;i<100;i++)
+            for (int i = 0; i < 100; i++)
                 sum += i;
             return sum;
         }
