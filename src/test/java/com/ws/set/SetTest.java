@@ -36,4 +36,21 @@ public class SetTest extends TestCase {
         }
     }
 
+    @Test
+    public void testList() {
+        List<String> itemIds = new ArrayList();
+        itemIds.add("1");
+        itemIds.add("2");
+        itemIds.add("3");
+        itemIds.add("2");
+
+
+        Set<String> itemIdSet = new HashSet<>(itemIds);
+
+        for (String a : itemIdSet) {
+            System.out.printf(a + ",");
+        }
+
+    }
+
 }
