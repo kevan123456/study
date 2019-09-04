@@ -4,6 +4,8 @@ import junit.framework.TestCase;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
+import java.util.Random;
+
 /**
  * @author yunhua
  * @since 2019-08-20
@@ -31,6 +33,12 @@ public class StringTest extends TestCase {
         String s = "儿童餐具 叉子";
         String str = s.replaceAll("\\s*", "");
         System.out.printf(str);
+    }
+
+    @Test
+    public void testRandom() {
+        Integer i = new Random().nextInt(10);
+        System.out.println(i);
     }
 
 }
