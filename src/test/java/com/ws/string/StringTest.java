@@ -26,4 +26,11 @@ public class StringTest extends TestCase {
         System.out.println(StringUtils.isBlank(sb.toString()));
     }
 
+    @Test
+    public void testStringUtil() {
+        String s = "儿童餐具 叉子";
+        String str = s.replaceAll("\\s*", "");
+        System.out.printf(str);
+    }
+
 }
