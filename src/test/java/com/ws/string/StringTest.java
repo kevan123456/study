@@ -32,7 +32,11 @@ public class StringTest extends TestCase {
     public void testStringUtil() {
         String s = "儿童餐具 叉子";
         String str = s.replaceAll("\\s*", "");
-        System.out.printf(str);
+        System.out.println(str);
+
+        String str2 = "儿童餐具 叉子";
+        String result = str2.replaceAll("儿童餐具叉子", "").replaceAll("儿童餐具 叉子", "");
+        System.out.println(result);
     }
 
     @Test
