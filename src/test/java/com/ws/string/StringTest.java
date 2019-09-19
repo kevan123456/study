@@ -12,6 +12,7 @@ import java.util.Random;
  */
 public class StringTest extends TestCase {
 
+    private static final long ACT_DISPLAY_UNIT_CHANGE = 10000;
 
     @Test
     public void test() {
@@ -43,6 +44,23 @@ public class StringTest extends TestCase {
     public void testRandom() {
         Integer i = new Random().nextInt(10);
         System.out.println(i);
+    }
+
+    @Test
+    public void testUnitChange() {
+        Long number = 1001L;
+        String result = unitChange(number);
+        System.out.println(result);
+    }
+
+    private static String unitChange(Long number) {
+        if (number == null) {
+            return null;
+        }
+        if (number < ACT_DISPLAY_UNIT_CHANGE) {
+            return number.toString();
+        }
+        return (number / ACT_DISPLAY_UNIT_CHANGE) + "w";
     }
 
 }
