@@ -1,9 +1,12 @@
 package com.ws.string;
 
+import com.alibaba.fastjson.JSONObject;
 import junit.framework.TestCase;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -63,4 +66,11 @@ public class StringTest extends TestCase {
         return (number / ACT_DISPLAY_UNIT_CHANGE) + "w";
     }
 
+    @Test
+    public void testMap() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("shop_artifact_tem_id", 1);
+        String json = JSONObject.toJSONString(map);
+        System.out.println(json);
+    }
 }
