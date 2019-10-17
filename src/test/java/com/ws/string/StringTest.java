@@ -3,6 +3,7 @@ package com.ws.string;
 import com.alibaba.fastjson.JSONObject;
 import junit.framework.TestCase;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.junit.Test;
 
 import java.util.HashMap;
@@ -72,5 +73,14 @@ public class StringTest extends TestCase {
         map.put("shop_artifact_tem_id", 1);
         String json = JSONObject.toJSONString(map);
         System.out.println(json);
+    }
+
+    @Test
+    public void testLong() {
+        String s = "123 ";
+        boolean flag = NumberUtils.isDigits(s);
+        System.out.println(flag);
+
+        System.out.println(Long.valueOf(s.trim()));
     }
 }
