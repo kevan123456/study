@@ -78,9 +78,13 @@ public class StringTest extends TestCase {
     @Test
     public void testLong() {
         String s = "123 ";
-        boolean flag = NumberUtils.isDigits(s);
-        System.out.println(flag);
+        if (StringUtils.isNotBlank(s)) {
+            s = s.trim();
+            boolean flag = NumberUtils.isDigits(s);
+            System.out.println(flag);
 
-        System.out.println(Long.valueOf(s.trim()));
+            System.out.println(Long.valueOf(s));
+        }
+
     }
 }
