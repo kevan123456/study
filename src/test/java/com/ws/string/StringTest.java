@@ -6,6 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.junit.Test;
 
+import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -86,5 +87,12 @@ public class StringTest extends TestCase {
             System.out.println(Long.valueOf(s));
         }
 
+    }
+
+    @Test
+    public void testDecode() throws Exception {
+        String s = "hipacapp://mall/TempletWeb?title=签到换券&link=https%3A%2F%2Fmall.hipac.cn%2Fytms%2Fpage%2Fcheckin.html%3Ft%3D5%26env%3Dmaster?origin=appHome";
+        String newStr = URLDecoder.decode(s, "UTF-8");
+        System.out.println(newStr);
     }
 }
