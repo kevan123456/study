@@ -95,4 +95,17 @@ public class StringTest extends TestCase {
         String newStr = URLDecoder.decode(s, "UTF-8");
         System.out.println(newStr);
     }
+
+    @Test
+    public void testReplace() {
+        String s = "+A";
+        String word = "+Aabc";
+        String newWord = null;
+        try {
+            newWord = word.replaceAll("[" + s + "]", "");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println(newWord);
+    }
 }
