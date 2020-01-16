@@ -99,10 +99,10 @@ public class StringTest extends TestCase {
     @Test
     public void testReplace() {
         String s = "+A";
-        String word = "+Aabc";
+        String word = "+A16abc";
         String newWord = null;
         try {
-            newWord = word.replaceAll("[" + s + "]", "");
+            newWord = word.replace(s, "");
         } catch (Exception e) {
             e.printStackTrace();
         }
