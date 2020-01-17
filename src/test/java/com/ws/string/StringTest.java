@@ -98,8 +98,8 @@ public class StringTest extends TestCase {
 
     @Test
     public void testReplace() {
-        String s = "A+";
-        String word = "A+奶粉";
+        String s = "+A";
+        String word = "+A奶粉";
         String newWord = null;
         try {
             newWord = word.replace(s, "");
