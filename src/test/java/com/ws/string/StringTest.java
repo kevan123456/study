@@ -108,4 +108,14 @@ public class StringTest extends TestCase {
         }
         System.out.println(newWord);
     }
+
+
+    @Test
+    public void testSplit() {
+        String s = "mallApp/android/02031441-36333fjfkd_1512x2016.jpg";
+        String[] array = s.split("-");
+        System.out.println(array.length);
+        System.out.println(array[0]);
+        System.out.println(array[1]);
+    }
 }
