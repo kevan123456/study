@@ -165,6 +165,20 @@
                         <skipTests>true</skipTests>
                     </configuration>
                 </plugin>
+                <!-- compiler插件, 设定JDK版本 -->
+                <plugin>
+                    <inherited>true</inherited>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.3</version>
+                    <configuration>
+                        <encoding>utf-8</encoding>
+                        <source>1.8</source>
+                        <target>1.8</target>
+                        <optimize>true</optimize>
+                        <debug>true</debug>
+                    </configuration>
+                </plugin>
 
             </plugins>
         </pluginManagement>
