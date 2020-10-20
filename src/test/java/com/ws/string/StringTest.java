@@ -7,7 +7,9 @@ import org.apache.commons.lang3.math.NumberUtils;
 import org.junit.Test;
 
 import java.net.URLDecoder;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -117,5 +119,18 @@ public class StringTest extends TestCase {
         System.out.println(array.length);
         System.out.println(array[0]);
         System.out.println(array[1]);
+    }
+
+    @Test
+    public void testJoin() {
+        List<String> list = new ArrayList<>();
+        list.add("a");
+        list.add("b");
+        list.add("c");
+        list.add("d");
+        list.add("ef");
+        list.add("ghi");
+        String a = String.join(",", list);
+        System.out.println(a);
     }
 }

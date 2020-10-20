@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -43,9 +44,13 @@ public class SetTest extends TestCase {
         itemIds.add("2");
         itemIds.add("3");
         itemIds.add("2");
+        itemIds.add("6");
+        itemIds.add("9");
+        itemIds.add("1");
+        itemIds.add("8");
 
 
-        Set<String> itemIdSet = new HashSet<>(itemIds);
+        Set<String> itemIdSet = new LinkedHashSet<>(itemIds);
 
         for (String a : itemIdSet) {
             System.out.printf(a + ",");

@@ -16,23 +16,36 @@ public class RedisLock extends TestBase {
     @Resource
     private RedisTemplate redisTemplate;
 
+    @Resource
+    //private Redisson redisson;
+
 
     @Test
     public void testDeductStock() {
         String key = "stock";
         boolean success = redisTemplate.opsForValue().setIfAbsent("lock", "1", 100, TimeUnit.SECONDS);
         if (success) {
-            int stock = Integer.valueOf((int) redisTemplate.opsForValue().get(key));
-            if (stock > 0) {
-                int newStock = stock - 1;
-                redisTemplate.opsForValue().set(key, newStock);
-                System.out.println("扣减成功，当前库存：" + newStock);
-            } else {
-                System.out.println("扣减失败，库存不足");
+            try {
+                int stock = Integer.valueOf((int) redisTemplate.opsForValue().get(key));
+                if (stock > 0) {
+                    int newStock = stock - 1;
+                    redisTemplate.opsForValue().set(key, newStock);
+                    System.out.println("扣减成功，当前库存：" + newStock);
+                } else {
+                    System.out.println("扣减失败，库存不足");
+                }
+            } finally {
+                redisTemplate.delete("lock");
             }
         }
-        System.out.println(success);
+
     }
 
+
+    @Test
+    public void testRedisonDeductStock() {
+
+
+    }
 
 }
