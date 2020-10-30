@@ -74,7 +74,12 @@ public class ListTest extends TestCase {
         hotBannerIds.add(2L);
         hotBannerIds.add(3L);
         String str = StringUtils.join(hotBannerIds, ",");
+
         System.out.println(str);
+        String s = StringUtils.join(hotBannerIds, "_");
+        System.out.println(s);
+
+
     }
 
     @Test
