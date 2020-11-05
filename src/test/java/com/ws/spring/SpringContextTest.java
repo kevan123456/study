@@ -24,13 +24,16 @@ public class SpringContextTest {
 
         //通过名称查找
         UserService userServiceByName = (UserService) ctx.getBean("userService");
+        System.out.println("userServiceByName:" + userServiceByName);
 
-        System.out.println("userServiceByName:" + userServiceByName.getName());
+        //通过类型查找
+        UserService userServiceByType = ctx.getBean(UserService.class);
+        System.out.println("userServiceByType:" + userServiceByType);
+
 
         //通过名称和类型查找
         UserService userServiceByNameType = ctx.getBean("userService", UserService.class);
-
-        System.out.println("userServiceByNameType:" + userServiceByNameType.getName());
+        System.out.println("userServiceByNameType:" + userServiceByNameType);
 
     }
 
@@ -43,17 +46,14 @@ public class SpringContextTest {
 
         //注意返回的是UserBean
         UserBean userBean = ctx.getBean("userBean", UserBean.class);
-
         System.out.println("userBean:" + userBean);
 
 
         //要返回UserFactoryBean前面加&
         UserFactoryBean userFactoryBean = ctx.getBean("&userBean", UserFactoryBean.class);
-
         System.out.println("userFactoryBean:" + userFactoryBean);
 
         UserBean userBeanFromFactory = userFactoryBean.getObject();
-
         System.out.println("userBeanFromFactory:" + userBeanFromFactory);
 
         System.out.println("userBeanFromFactory==userBean:" + (userBeanFromFactory == userBean));
@@ -78,7 +78,6 @@ public class SpringContextTest {
         System.out.println("userObjectFactory:" + userObjectFactory);
 
         UserBean userBean = userObjectFactory.getObject();
-
         System.out.println("userBean:" + userBean);
     }
 
