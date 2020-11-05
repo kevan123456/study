@@ -17,7 +17,9 @@ public class SpringContextTest {
     public void test() {
 
         ApplicationContext ctx = new ClassPathXmlApplicationContext(CONTEXT);
-        UserService userService = (UserService) ctx.getBean("userService");
+
+        UserService userService = ctx.getBean("userService", UserService.class);
+
         System.out.println("userService:" + userService.getName());
 
     }
