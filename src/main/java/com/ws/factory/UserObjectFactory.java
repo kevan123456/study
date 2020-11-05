@@ -8,11 +8,11 @@ import org.springframework.beans.factory.ObjectFactory;
  * @author yunhua
  * @since 2020-11-05
  */
-public class UserObjectFactory implements ObjectFactory {
+public class UserObjectFactory implements ObjectFactory<UserBean> {
 
 
     @Override
-    public Object getObject() throws BeansException {
+    public UserBean getObject() throws BeansException {
 
         UserBean userBean = new UserBean();
         userBean.setId("2");

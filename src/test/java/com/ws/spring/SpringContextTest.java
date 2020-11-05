@@ -22,9 +22,15 @@ public class SpringContextTest {
 
         ApplicationContext ctx = new ClassPathXmlApplicationContext(CONTEXT);
 
-        UserService userService = ctx.getBean("userService", UserService.class);
+        //通过名称查找
+        UserService userServiceByName = (UserService) ctx.getBean("userService");
 
-        System.out.println("userService:" + userService.getName());
+        System.out.println("userServiceByName:" + userServiceByName.getName());
+
+        //通过名称和类型查找
+        UserService userServiceByNameType = ctx.getBean("userService", UserService.class);
+
+        System.out.println("userServiceByNameType:" + userServiceByNameType.getName());
 
     }
 
@@ -67,10 +73,11 @@ public class SpringContextTest {
     @Test
     public void testObjectFactory() {
         ApplicationContext ctx = new ClassPathXmlApplicationContext(CONTEXT);
+        //延迟查找
         UserObjectFactory userObjectFactory = ctx.getBean("userObjectFactory", UserObjectFactory.class);
         System.out.println("userObjectFactory:" + userObjectFactory);
 
-        UserBean userBean = (UserBean) userObjectFactory.getObject();
+        UserBean userBean = userObjectFactory.getObject();
 
         System.out.println("userBean:" + userBean);
     }
