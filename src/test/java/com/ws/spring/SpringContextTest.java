@@ -2,6 +2,7 @@ package com.ws.spring;
 
 import com.ws.bean.UserBean;
 import com.ws.factory.UserFactoryBean;
+import com.ws.factory.UserObjectFactory;
 import com.ws.service.UserService;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -62,5 +63,16 @@ public class SpringContextTest {
         System.out.println("environment:" + environment);
     }
 
+
+    @Test
+    public void testObjectFactory() {
+        ApplicationContext ctx = new ClassPathXmlApplicationContext(CONTEXT);
+        UserObjectFactory userObjectFactory = ctx.getBean("userObjectFactory", UserObjectFactory.class);
+        System.out.println("userObjectFactory:" + userObjectFactory);
+
+        UserBean userBean = (UserBean) userObjectFactory.getObject();
+
+        System.out.println("userBean:" + userBean);
+    }
 
 }

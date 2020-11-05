@@ -12,4 +12,6 @@
         <property name="info" value="1,kevan,30"/>
     </bean>
 
+    <bean id="userObjectFactory" class="com.ws.factory.UserObjectFactory"/>
+
 </beans>
