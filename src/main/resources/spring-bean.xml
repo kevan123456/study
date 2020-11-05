@@ -8,4 +8,8 @@
 
     <bean id="userService" class="com.ws.service.impl.UserServiceImpl"/>
 
+    <bean id="userBean" class="com.ws.factory.UserFactoryBean">
+        <property name="info" value="1,kevan,30"/>
+    </bean>
+
 </beans>
