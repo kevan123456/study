@@ -9,5 +9,5 @@
 
     <context:annotation-config/>
 
-    <import resource="classpath:springcontext.xml"/>
+    <import resource="classpath:spring-context.xml"/>
 </beans>

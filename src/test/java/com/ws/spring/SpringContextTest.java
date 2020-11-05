@@ -11,7 +11,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  */
 public class SpringContextTest {
 
-    private static final String CONTEXT = "springcontext.xml";
+    private static final String CONTEXT = "spring-context.xml";
 
     @Test
     public void test() {
