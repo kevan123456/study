@@ -6,6 +6,7 @@ import com.ws.service.UserService;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.core.env.Environment;
 
 /**
  * @author yunhua
@@ -44,5 +45,22 @@ public class SpringContextTest {
 
         System.out.println("userFactoryBean:" + userFactoryBean);
 
+        UserBean userBeanFromFactory = userFactoryBean.getObject();
+
+        System.out.println("userBeanFromFactory:" + userBeanFromFactory);
+
+        System.out.println("userBeanFromFactory==userBean:" + (userBeanFromFactory == userBean));
+
     }
+
+
+    @Test
+    public void testInnerBean() {
+        ApplicationContext ctx = new ClassPathXmlApplicationContext(CONTEXT);
+        Environment environment = ctx.getBean(Environment.class);
+        //容器内建的bean
+        System.out.println("environment:" + environment);
+    }
+
+
 }
