@@ -5,9 +5,13 @@ import com.ws.factory.UserFactoryBean;
 import com.ws.factory.UserObjectFactory;
 import com.ws.service.UserService;
 import org.junit.Test;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.ListableBeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.core.env.Environment;
+
+import java.util.Map;
 
 /**
  * @author yunhua
@@ -20,7 +24,7 @@ public class SpringContextTest {
     @Test
     public void testGetBean() throws Exception {
 
-        ApplicationContext ctx = new ClassPathXmlApplicationContext(CONTEXT);
+        BeanFactory ctx = new ClassPathXmlApplicationContext(CONTEXT);
 
         //通过名称查找
         UserService userServiceByName = (UserService) ctx.getBean("userService");
@@ -29,6 +33,13 @@ public class SpringContextTest {
         //通过类型查找
         UserService userServiceByType = ctx.getBean(UserService.class);
         System.out.println("userServiceByType:" + userServiceByType);
+
+        //集合bean对象
+        if (ctx instanceof ListableBeanFactory) {
+            ListableBeanFactory listableBeanFactory = (ListableBeanFactory) ctx;
+            Map<String, UserService> map = listableBeanFactory.getBeansOfType(UserService.class);
+            System.out.println("userServiceByCollection:" + map);
+        }
 
 
         //通过名称和类型查找
