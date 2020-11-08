@@ -12,7 +12,10 @@ public class SynchronizedTest extends TestCase {
 
 
     @Test
-    public void test() {
+    public void test() throws Exception {
+        //偏向锁有启动时延，默认4s以后
+        Thread.sleep(5000);
+
         Object o = new Object();
         //打印类布局
         System.out.printf(ClassLayout.parseInstance(o).toPrintable());
