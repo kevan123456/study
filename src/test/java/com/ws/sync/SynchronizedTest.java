@@ -13,7 +13,9 @@ public class SynchronizedTest extends TestCase {
 
     @Test
     public void test() throws Exception {
-        //偏向锁有启动时延，默认4s以后
+        //-XX:BiasedLockingStartupDelay=0
+        // 偏向锁有启动时延，默认4s以后。因为JVM启动后一定会有锁竞争
+        // 一旦启动偏向锁机制后，new的对象就是匿名偏向
         Thread.sleep(5000);
 
         Object o = new Object();
