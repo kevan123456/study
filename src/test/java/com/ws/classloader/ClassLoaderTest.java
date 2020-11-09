@@ -33,6 +33,7 @@ public class ClassLoaderTest extends TestCase {
         System.out.println("class：" + clazz3.hashCode());
 
         //获取类加载器
+        //app->ext->boot
         ClassLoader classLoader = clazz1.getClassLoader();
         System.out.println("classloader:" + classLoader);
         System.out.println("classloader:" + clazz2.getClassLoader());
