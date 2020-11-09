@@ -33,8 +33,13 @@ public class ClassLoaderTest extends TestCase {
         System.out.println("class：" + clazz3.hashCode());
 
         //获取类加载器
-        System.out.println("classloader:" + clazz1.getClassLoader());
+        ClassLoader classLoader = clazz1.getClassLoader();
+        System.out.println("classloader:" + classLoader);
         System.out.println("classloader:" + clazz2.getClassLoader());
         System.out.println("classloader:" + clazz3.getClassLoader());
+
+        //获取父加载器
+        System.out.println("classloader.getParent():" + classLoader.getParent());
+        System.out.println("classloader.getParent().getParent():" + classLoader.getParent().getParent());
     }
 }
