@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
-import java.util.Stack;
 
 /**
  * @author yunhua
@@ -135,17 +134,17 @@ public class TreeTest extends TestCase {
             if (root == null) {
                 return deep;
             }
-            Stack<TreeNode> stack = new Stack<>();
-            stack.push(root);
+            Queue<TreeNode> stack = new LinkedList<>();
+            stack.add(root);
             while (!stack.isEmpty()) {
                 deep++;
                 for (int i = stack.size(); i > 0; i--) {
-                    TreeNode node = stack.pop();
+                    TreeNode node = stack.poll();
                     if (node.getLeft() != null) {
-                        stack.push(node.getLeft());
+                        stack.add(node.getLeft());
                     }
                     if (node.getRight() != null) {
-                        stack.push(node.getRight());
+                        stack.add(node.getRight());
                     }
                 }
 
