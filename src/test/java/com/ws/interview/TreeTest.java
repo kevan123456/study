@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+import java.util.Stack;
 
 /**
  * @author yunhua
@@ -127,6 +128,29 @@ public class TreeTest extends TestCase {
 
             return left > right ? left : right;
 
+        }
+
+        public int getDeep2(TreeNode root) {
+            int deep = 0;
+            if (root == null) {
+                return deep;
+            }
+            Stack<TreeNode> stack = new Stack<>();
+            stack.push(root);
+            while (!stack.isEmpty()) {
+                deep++;
+                for (int i = stack.size(); i > 0; i--) {
+                    TreeNode node = stack.pop();
+                    if (node.getLeft() != null) {
+                        stack.push(node.getLeft());
+                    }
+                    if (node.getRight() != null) {
+                        stack.push(node.getRight());
+                    }
+                }
+
+            }
+            return deep;
 
         }
     }
@@ -155,11 +179,16 @@ public class TreeTest extends TestCase {
          *
          */
         Solution solution = new Solution();
-        Integer[] array = solution.printNode(root);
-        //打印节点
-        System.out.println(JSON.toJSON(array));
+
         //打印深度
         System.out.println("deep:" + solution.getDeep(root));
+        System.out.println("deep2:" + solution.getDeep2(root));
+
+
+        //打印节点
+        Integer[] array = solution.printNode(root);
+        System.out.println(JSON.toJSON(array));
+
         //打印节点二位数组
         List<List<Integer>> list = solution.printNode2(root);
         System.out.println(JSON.toJSON(list));
