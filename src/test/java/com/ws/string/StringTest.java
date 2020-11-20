@@ -133,4 +133,14 @@ public class StringTest extends TestCase {
         String a = String.join(",", list);
         System.out.println(a);
     }
+
+    @Test
+    public void testHash() {
+        String a = "a";
+        String b = "b";
+        String z = "测试啊，kevan";
+        System.out.println("a.hashcode:" + a.hashCode());
+        System.out.println("b.hashcode:" + b.hashCode());
+        System.out.println("z.hashcode:" + z.hashCode());
+    }
 }
