@@ -158,23 +158,35 @@ public class TreeTest extends TestCase {
     public void testPrint() {
         TreeNode root = new TreeNode();
         root.setVal(3);
+
         TreeNode left1 = new TreeNode();
         left1.setVal(9);
         root.setLeft(left1);
+
+        TreeNode right2 = new TreeNode();
+        right2.setVal(8);
+        left1.setRight(right2);
 
         TreeNode right1 = new TreeNode();
         right1.setVal(7);
         root.setRight(right1);
 
+
         TreeNode left2 = new TreeNode();
         left2.setVal(4);
         left1.setLeft(left2);
+
+
+        TreeNode left3 = new TreeNode();
+        left3.setVal(5);
+        left2.setLeft(left3);
+
         /**
          * 目前数据
-         *          3
-         *      9       7
-         *  4
-         *
+         *              3
+         *          9       7
+         *      4       8
+         *  5
          *
          */
         Solution solution = new Solution();
