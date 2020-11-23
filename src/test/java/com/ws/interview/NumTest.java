@@ -18,11 +18,13 @@ public class NumTest {
      */
     public int removeDuplicates(int[] nums) {
         int newLength = 0;
+        if (nums == null) {
+            return newLength;
+        }
         for (int j = 1; j < nums.length; j++) {
-            if (nums[j - 1] != nums[j]) {
+            if (nums[j] != nums[j - 1]) {
                 newLength++;
                 nums[newLength] = nums[j];
-
             }
         }
         return newLength + 1;
@@ -50,6 +52,9 @@ public class NumTest {
      */
     public int removeElement(int[] nums, int val) {
         int newLength = 0;
+        if (nums == null) {
+            return newLength;
+        }
         for (int i = 0; i < nums.length; i++) {
             if (nums[i] != val) {
                 nums[newLength] = nums[i];
