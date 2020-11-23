@@ -173,6 +173,12 @@ public class TreeTest extends TestCase {
             return this.isSort(list);
         }
 
+        /**
+         * 中序遍历
+         *
+         * @param node
+         * @param list
+         */
         private void ldr(TreeNode node, List<Integer> list) {
             if (node == null) {
                 return;
@@ -185,6 +191,11 @@ public class TreeTest extends TestCase {
             ldr(node.getRight(), list);
         }
 
+        /**
+         * 是否升序
+         * @param list
+         * @return
+         */
         private boolean isSort(List<Integer> list) {
             if (CollectionUtils.isEmpty(list)) {
                 return true;
