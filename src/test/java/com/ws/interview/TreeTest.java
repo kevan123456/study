@@ -2,6 +2,7 @@ package com.ws.interview;
 
 import com.alibaba.fastjson.JSON;
 import junit.framework.TestCase;
+import org.apache.commons.collections.CollectionUtils;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -152,7 +153,52 @@ public class TreeTest extends TestCase {
             return deep;
 
         }
+
+        /**
+         * 给定一个二叉树，判断其是否是一个有效的二叉搜索树。
+         * <p>
+         * 假设一个二叉搜索树具有如下特征：
+         * <p>
+         * 节点的左子树只包含小于当前节点的数。
+         * 节点的右子树只包含大于当前节点的数。
+         * 所有左子树和右子树自身必须也是二叉搜索树。
+         * <p>
+         *
+         * @param root
+         * @return
+         */
+        public boolean isValidBST(TreeNode root) {
+            List<Integer> list = new ArrayList<>();
+            this.ldr(root, list);
+            return this.isSort(list);
+        }
+
+        private void ldr(TreeNode node, List<Integer> list) {
+            if (node == null) {
+                return;
+            }
+            if (list == null) {
+                list = new ArrayList<>();
+            }
+            ldr(node.getLeft(), list);
+            list.add(node.getVal());
+            ldr(node.getRight(), list);
+        }
+
+        private boolean isSort(List<Integer> list) {
+            if (CollectionUtils.isEmpty(list)) {
+                return true;
+            }
+            for (int i = 1; i < list.size(); i++) {
+                if (list.get(i) <= list.get(i - 1)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
     }
+
 
     @Test
     public void testPrint() {
@@ -203,5 +249,9 @@ public class TreeTest extends TestCase {
         //打印节点二位数组
         List<List<Integer>> list = solution.printNode2(root);
         System.out.println(JSON.toJSON(list));
+
+        //判断是否排序二叉树
+        boolean isSort = solution.isValidBST(root);
+        System.out.println(isSort);
     }
 }
