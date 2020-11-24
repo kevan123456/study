@@ -4,6 +4,7 @@ import com.ws.bean.UserBalance;
 import com.ws.manager.UserBalanceManager;
 import com.ws.service.UserBalanceService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.Objects;
@@ -20,6 +21,7 @@ public class UserBalanceServiceImpl implements UserBalanceService {
     private UserBalanceManager userBalanceManager;
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public boolean decreaseBalance(Long userId, Long price) throws Exception {
         UserBalance userBalance = userBalanceManager.getByUserId(userId);
         if (Objects.isNull(userBalance) || Objects.isNull(userBalance.getBalance())) {
@@ -28,7 +30,7 @@ public class UserBalanceServiceImpl implements UserBalanceService {
         Long balance = userBalance.getBalance();
         Long result = balance - price;
         if (result < 0) {
-            throw new Exception("余额不足");
+            throw new RuntimeException("余额不足");
         }
 
         userBalanceManager.updateBalanceByUserId(userId, result);

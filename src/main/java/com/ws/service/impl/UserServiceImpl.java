@@ -7,6 +7,7 @@ import com.ws.manager.UserManager;
 import com.ws.service.UserBalanceService;
 import com.ws.service.UserService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 
@@ -39,14 +40,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void buyItem(Long userId, Long itemId, Long price) throws Exception {
         Order order = new Order();
         order.setItemId(itemId);
         order.setPrice(price);
         order.setUserId(userId);
-        orderManager.insertOrder(order);
+        int count = orderManager.insertOrder(order);
 
-        userBalanceService.decreaseBalance(userId, price);
+        boolean flag = userBalanceService.decreaseBalance(userId, price);
+
 
     }
 }
