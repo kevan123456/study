@@ -12,6 +12,8 @@
 
     <import resource="classpath:spring-bean.xml"/>
 
+    <import resource="dataSource.xml"/>
+
     <!--设置jedisPool链接池的配置-->
     <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
         <property name="maxTotal" value="${redis.maxTotal}"/>
