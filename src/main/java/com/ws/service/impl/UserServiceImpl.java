@@ -48,7 +48,10 @@ public class UserServiceImpl implements UserService {
         order.setUserId(userId);
         int count = orderManager.insertOrder(order);
 
+
         boolean flag = userBalanceService.decreaseBalance(userId, price);
+
+        Thread.sleep(10000);
 
 
     }
