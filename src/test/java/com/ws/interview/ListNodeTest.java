@@ -38,15 +38,15 @@ public class ListNodeTest {
     /**
      * 请判断一个链表是否为回文链表。
      *
-     * @param root
+     * @param head
      * @return
      */
-    public boolean isPalindrome(ListNode root) {
-        if (Objects.isNull(root) || Objects.isNull(root.next)) {
+    public boolean isPalindrome(ListNode head) {
+        if (Objects.isNull(head) || Objects.isNull(head.next)) {
             return true;
         }
         List<Integer> list = new ArrayList<>();
-        ListNode temp = root;
+        ListNode temp = head;
         while (temp != null) {
             list.add(temp.getVal());
             temp = temp.getNext();
@@ -65,11 +65,11 @@ public class ListNodeTest {
 
     @Test
     public void testIsPalindrome() {
-        ListNode root = new ListNode();
-        root.setVal(1);
+        ListNode head = new ListNode();
+        head.setVal(1);
         ListNode node2 = new ListNode();
         node2.setVal(3);
-        root.setNext(node2);
+        head.setNext(node2);
         ListNode node3 = new ListNode();
         node3.setVal(3);
         node2.setNext(node3);
@@ -79,7 +79,7 @@ public class ListNodeTest {
         /**
          * 1 3 3 1
          */
-        System.out.println("是否回文:" + isPalindrome(root));
+        System.out.println("是否回文:" + isPalindrome(head));
     }
 
 }
