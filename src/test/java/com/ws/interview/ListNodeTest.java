@@ -35,6 +35,12 @@ public class ListNodeTest {
         }
     }
 
+    /**
+     * 请判断一个链表是否为回文链表。
+     *
+     * @param root
+     * @return
+     */
     public boolean isPalindrome(ListNode root) {
         if (Objects.isNull(root) || Objects.isNull(root.next)) {
             return true;
