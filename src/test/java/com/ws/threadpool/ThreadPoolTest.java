@@ -34,7 +34,13 @@ public class ThreadPoolTest extends TestCase {
 
     @Test
     public void testSubmit() {
-        RejectedExecutionHandler handler = new ThreadPoolExecutor.DiscardOldestPolicy();
+        RejectedExecutionHandler handler = null;
+        //当任务被拒绝添加时，会抛弃任务队列中最旧的任务也就是最先加入队列的，再把这个新任务添加进去。
+        handler = new ThreadPoolExecutor.DiscardOldestPolicy();
+        //丢弃当前将要加入队列的任务本身
+        //handler = new ThreadPoolExecutor.DiscardPolicy();
+        //有调用者线程去执行
+        //handler = new ThreadPoolExecutor.CallerRunsPolicy();
         ThreadPoolExecutor executor = new ThreadPoolExecutor(10, 20, 0, TimeUnit.MICROSECONDS, new ArrayBlockingQueue<>(10), handler);
         for (int i = 0; i < 100; i++) {
             executor.submit(new MyTask(i));
