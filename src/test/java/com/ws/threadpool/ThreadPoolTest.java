@@ -41,7 +41,7 @@ public class ThreadPoolTest extends TestCase {
         //handler = new ThreadPoolExecutor.DiscardPolicy();
         //有调用者线程去执行
         //handler = new ThreadPoolExecutor.CallerRunsPolicy();
-        ThreadPoolExecutor executor = new ThreadPoolExecutor(10, 20, 0, TimeUnit.MICROSECONDS, new ArrayBlockingQueue<>(10), handler);
+        ThreadPoolExecutor executor = new ThreadPoolExecutor(10, 20, 10, TimeUnit.SECONDS, new ArrayBlockingQueue<>(10), handler);
         for (int i = 0; i < 100; i++) {
             executor.submit(new MyTask(i));
         }
