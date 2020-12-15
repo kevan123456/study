@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.Callable;
+import java.util.concurrent.RejectedExecutionHandler;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
@@ -26,14 +27,15 @@ public class ThreadPoolTest extends TestCase {
         @Override
         public String call() throws Exception {
             System.out.println(Thread.currentThread().getName() + "-->" + i);
-            Thread.sleep(1000);
+            Thread.sleep(10);
             return "call success";
         }
     }
 
     @Test
-    public void test() {
-        ThreadPoolExecutor executor = new ThreadPoolExecutor(10, 20, 10, TimeUnit.MILLISECONDS, new ArrayBlockingQueue<>(10));
+    public void testSubmit() {
+        RejectedExecutionHandler handler = new ThreadPoolExecutor.DiscardOldestPolicy();
+        ThreadPoolExecutor executor = new ThreadPoolExecutor(10, 20, 0, TimeUnit.MICROSECONDS, new ArrayBlockingQueue<>(10), handler);
         for (int i = 0; i < 100; i++) {
             executor.submit(new MyTask(i));
         }
