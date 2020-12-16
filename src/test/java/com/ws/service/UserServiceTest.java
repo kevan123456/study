@@ -27,6 +27,7 @@ public class UserServiceTest extends TestBase {
     @Test
     public void testBuyItem() throws Exception {
         userService.buyItem(userId, 11L, 101L);
+        System.out.println("success");
     }
 
 }
