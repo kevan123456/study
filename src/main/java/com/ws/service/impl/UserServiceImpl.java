@@ -46,6 +46,7 @@ public class UserServiceImpl implements UserService {
         order.setItemId(itemId);
         order.setPrice(price);
         order.setUserId(userId);
+        //下面也加入事物才会一起回滚，并且传播属性为request
         orderManager.insertOrder(order);
 
         Thread.sleep(3000);
