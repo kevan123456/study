@@ -1,5 +1,6 @@
 package com.ws.dao.mapper;
 
+import com.github.pagehelper.Page;
 import com.ws.bean.Order;
 
 public interface OrderMapper {
@@ -14,4 +15,8 @@ public interface OrderMapper {
     int updateByPrimaryKeySelective(Order record);
 
     int updateByPrimaryKey(Order record);
+
+
+    Page<Order> selectByUserId(Long userId);
+
 }

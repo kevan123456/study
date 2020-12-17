@@ -65,6 +65,20 @@
         <property name="dataSource" ref="druidDataSource"/>
         <!--<property name="configLocation" value="classpath:mybatis-config.xml"></property>-->
         <property name="mapperLocations" value="classpath:resource/mapper/**/*Mapper.xml"></property>
+        <property name="plugins">
+            <array>
+                <bean class="com.github.pagehelper.PageInterceptor">
+                    <property name="properties">
+                        <value>
+                            reasonable=false
+                            offsetAsPageNum=true
+                            rowBoundsWithCount=true
+                            pageSizeZero=true
+                        </value>
+                    </property>
+                </bean>
+            </array>
+        </property>
     </bean>
 
     <!-- 配置SQLSession模板 -->

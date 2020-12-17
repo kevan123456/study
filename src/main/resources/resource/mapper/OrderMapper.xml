@@ -104,4 +104,12 @@
         user_id = #{price,jdbcType=BIGINT}
         where id = #{id,jdbcType=BIGINT}
     </update>
+
+    <select id="selectByUserId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_order
+        where user_id = #{userId}
+        order by id
+    </select>
 </mapper>
