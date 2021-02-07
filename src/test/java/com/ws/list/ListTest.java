@@ -6,6 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -99,6 +100,14 @@ public class ListTest extends TestCase {
         list.add("3");
         System.out.println(list.contains(null));
         System.out.println(list.contains("3"));
+    }
+
+
+    @Test
+    public void testArray2List() {
+        Integer[] arr = {1, 2, 3, 4, 3, 34};
+        List<Integer> list = Arrays.asList(arr);
+        System.out.println(list);
     }
 
 }
