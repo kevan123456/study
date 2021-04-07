@@ -143,4 +143,12 @@ public class StringTest extends TestCase {
         System.out.println("b.hashcode:" + b.hashCode());
         System.out.println("z.hashcode:" + z.hashCode());
     }
+
+
+    @Test
+    public void testReplaceB() {
+        String word = "https://cdn1.dahiti.com/606c2637a578e63cbf1da3f3.xlsx";
+        String newWord = word.replaceAll("https", "http");
+        System.out.printf(newWord);
+    }
 }
