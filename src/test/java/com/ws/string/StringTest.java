@@ -148,7 +148,9 @@ public class StringTest extends TestCase {
     @Test
     public void testReplaceB() {
         String word = "https://cdn1.dahiti.com/606c2637a578e63cbf1da3f3.xlsx";
-        String newWord = word.replaceAll("https", "http");
-        System.out.printf(newWord);
+        if(StringUtils.isNotBlank(word)){
+            String newWord = word.replaceAll("https", "http");
+            System.out.printf(newWord);
+        }
     }
 }
