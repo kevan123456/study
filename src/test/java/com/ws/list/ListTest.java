@@ -110,4 +110,11 @@ public class ListTest extends TestCase {
         System.out.println(list);
     }
 
+
+    @Test
+    public void testArray2List2() {
+        String[] arr = {"1", "2"};
+        List<String> list = Arrays.asList(arr);
+        System.out.println(list);
+    }
 }
