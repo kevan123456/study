@@ -47,6 +47,28 @@ public class ListTest extends TestCase {
         return newList;
     }
 
+    @Test
+    public void testSubListByStep() {
+        List<String> openIdList = new ArrayList<>();
+        openIdList.add("1");
+        openIdList.add("2");
+        openIdList.add("3");
+        openIdList.add("4");
+        openIdList.add("5");
+        int step = 2;
+        int toIndex = step;
+        for (int i = 0; i < openIdList.size(); i += step) {
+            List newList;
+            if (i + step > openIdList.size()) {
+                // 注意下标问题
+                toIndex = openIdList.size();
+                newList = openIdList.subList(i, toIndex);
+            } else {
+                newList = openIdList.subList(i, i + toIndex);
+            }
+            System.out.println(newList);
+        }
+    }
 
     @Test
     public void testSubList1() {
