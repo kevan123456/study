@@ -148,9 +148,16 @@ public class StringTest extends TestCase {
     @Test
     public void testReplaceB() {
         String word = "https://cdn1.dahiti.com/606c2637a578e63cbf1da3f3.xlsx";
-        if(StringUtils.isNotBlank(word)){
+        if (StringUtils.isNotBlank(word)) {
             String newWord = word.replaceAll("https", "http");
             System.out.printf(newWord);
         }
+    }
+
+    @Test
+    public void testFormat() {
+
+        String msg = String.format("，token将在%s失效，请尽快授权！", "2020-05-21 11:11:00");
+        System.out.printf(msg);
     }
 }

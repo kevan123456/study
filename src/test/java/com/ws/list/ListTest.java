@@ -1,5 +1,6 @@
 package com.ws.list;
 
+import com.ws.bean.UserBean;
 import junit.framework.TestCase;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -7,6 +8,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -138,5 +140,25 @@ public class ListTest extends TestCase {
         String[] arr = {"1", "2"};
         List<String> list = Arrays.asList(arr);
         System.out.println(list);
+    }
+
+    @Test
+    public void testSortList() {
+        UserBean u1 = new UserBean();
+        u1.setName("kevan");
+        u1.setAge(30);
+        UserBean u2 = new UserBean();
+        u2.setName("wangshun");
+        u2.setAge(31);
+        List<UserBean> list = new ArrayList<>();
+        list.add(u2);
+        list.add(u1);
+        List<UserBean> sortList = new ArrayList<>();
+        for (UserBean u : list) {
+            sortList.add(u);
+        }
+
+        sortList.sort(Comparator.comparing(UserBean::getName));
+        System.out.println(sortList);
     }
 }
