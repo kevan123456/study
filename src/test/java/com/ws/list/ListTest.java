@@ -9,7 +9,9 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author yunhua
@@ -160,5 +162,64 @@ public class ListTest extends TestCase {
 
         sortList.sort(Comparator.comparing(UserBean::getName));
         System.out.println(sortList);
+    }
+
+
+    @Test
+    public void testSortList2() {
+        UserBean u1 = new UserBean();
+        u1.setName("kevan");
+        u1.setAge(30);
+        UserBean u2 = new UserBean();
+        u2.setName("wangshun");
+        u2.setAge(31);
+        List<UserBean> list = new ArrayList<>();
+        list.add(u2);
+        list.add(u1);
+        List<UserBean> sortList = new ArrayList<>();
+        for (UserBean u : list) {
+            sortList.add(u);
+        }
+        sortList.sort(new Comparator<UserBean>() {
+                          @Override
+                          public int compare(UserBean o1, UserBean o2) {
+                              if (o1.getAge() > o2.getAge()) {
+                                  return -1;
+                              } else if (o1.getAge() < o2.getAge()) {
+                                  return 1;
+                              }
+                              return 0;
+                          }
+                      }
+        );
+        System.out.println(sortList);
+    }
+
+
+    @Test
+    public void testSet2List() {
+        Set<String> set = new HashSet<>();
+        //set.add("1");
+        set.add("4");
+        List<String> list = new ArrayList<>();
+        list.add("2");
+        list.add("1");
+        list.add("3");
+        list.add("1");
+        set.addAll(list);
+        List<String> result = new ArrayList(set);
+        System.out.println(result);
+    }
+
+
+    @Test
+    public void testSet2Array() {
+        Set<String> set = new HashSet<>();
+        //set.add("1");
+        set.add("4");
+        String[] arr = {"1", "2", "10", "8"};
+        set.addAll(Arrays.asList(arr));
+        String[] shopCodeArr = set.toArray(new String[set.size()]);
+        System.out.println(shopCodeArr);
     }
 }
