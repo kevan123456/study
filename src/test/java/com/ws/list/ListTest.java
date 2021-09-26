@@ -222,4 +222,49 @@ public class ListTest extends TestCase {
         String[] shopCodeArr = set.toArray(new String[set.size()]);
         System.out.println(shopCodeArr);
     }
+
+    @Test
+    public void testListContains() {
+        List<String> list = new ArrayList<>();
+        list.add("已揽收");
+        list.add("揽收");
+        boolean flag = false;
+        for (String s : list) {
+            if ("skj揽收，待收货".contains(s)) {
+                flag = true;
+            }
+        }
+
+        System.out.println(flag);
+    }
+
+
+    @Test
+    public void testListCopy() {
+        List<UserBean> list = new ArrayList<>();
+        UserBean bean1 = new UserBean();
+        bean1.setId("1");
+        bean1.setName("A");
+        bean1.setAge(10);
+        list.add(bean1);
+        UserBean bean2 = new UserBean();
+        bean2.setId("2");
+        bean2.setName("B");
+        bean2.setAge(20);
+        list.add(bean2);
+
+        List<UserBean> copyList = new ArrayList<>();
+
+        for (UserBean b : list) {
+            UserBean u = new UserBean();
+            u.setId(b.getId());
+            u.setName(b.getName());
+            u.setAge(b.getAge());
+            copyList.add(u);
+        }
+        copyList.get(0).setId("30");
+
+        System.out.println(list);
+    }
+
 }
