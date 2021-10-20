@@ -29,4 +29,16 @@ public class DateTest extends TestCase {
         String d = sdf.format(date);
         System.out.println(d);
     }
+
+    @Test
+    public void test() {
+        long now = System.currentTimeMillis();
+        long time = now - 1603174200000L;
+        System.out.println("m:" + time);
+        System.out.println("day:" + time / 24 / 3600 / 1000);
+
+        long start = now - (365L * 24 * 60 * 60 * 1000);
+
+        System.out.println("start:" + start);
+    }
 }
