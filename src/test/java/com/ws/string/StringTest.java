@@ -160,4 +160,11 @@ public class StringTest extends TestCase {
         String msg = String.format("，token将在%s失效，请尽快授权！", "2020-05-21 11:11:00");
         System.out.printf(msg);
     }
+
+    @Test
+    public void testNull() {
+        String s = null;
+        System.out.println(String.valueOf(s) + "abc");
+    }
+
 }
