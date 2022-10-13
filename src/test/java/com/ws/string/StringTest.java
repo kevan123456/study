@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.regex.Pattern;
 
 /**
  * @author yunhua
@@ -167,4 +168,27 @@ public class StringTest extends TestCase {
         System.out.println(String.valueOf(s) + "abc");
     }
 
+    @Test
+    public void testSubString() {
+        //String tel = "*******2099";
+        String tel = "33353235234afd4d7702c116a204312122a668ddff700f95674bfbb63002635a263ce9";
+        String endTel = tel.substring(tel.length() - 5);
+        System.out.printf(endTel);
+    }
+
+    @Test
+    public void testTrim() {
+        String s = "  abc";
+        s = s.trim();
+        System.out.println(s);
+    }
+
+    @Test
+    public void testMatches() {
+        String address = "沙*镇广东省东莞市 **镇 进**路启盈国际**中心菜鸟定制**号库**楼@******#*************#";
+        //String address = "沙田镇沙田镇广东省东莞市 沙田镇 进港南路启盈国际快件中心菜鸟定制仓1号库-4楼@Q7Y8ZCB#ETMF13K6DKVL8#";
+        //String address = "SV9356@|8cCU8TYEjz3bAv+mp1XPUW4Uk+jD/Akrnw2tbjzIkUgCdCLtkuwfpqhm3TVUg+X988SrvUtqLwgOSdkDDp080ju6QxR8KQwKCdvxa3zEVSoWaGyBUeoWbPYjX1cQUpT8##EF0A9C51521E412474B8164B330056D9";
+        boolean flag = Pattern.matches("^.+@[a-zA-Z0-9*]+#[a-zA-Z0-9*]+#$", address);
+        System.out.println(flag);
+    }
 }
