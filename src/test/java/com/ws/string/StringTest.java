@@ -115,8 +115,11 @@ public class StringTest extends TestCase {
 
     @Test
     public void testSplit() {
-        String s = "mallApp/android/02031441-36333fjfkd_1512x2016.jpg";
-        String[] array = s.split("-");
+        String s = "$fBbxhRuce5egc41I+1s08zCu4HSgoWcCvq0RedzFrVg=$Ci1tZXJjaGFudC5vcGVuLnNlY3JldC5rZXkua3M2ODM3MDI3MTk1NjIyODI2MjAS\n" +
+                "ILyGqXfme+5KKpL6ionfflCNJWSbnmbcGk+LoVqzKY1fGhJdoOctnwC9IoHV36eUite19EwiIAF6O7NqgT5Np+dccCJAhXMY40MSCcTdIT9Dh\n" +
+                "JMZkdRTKAUwAQ==&Ci1tZXJjaGFudC5vcGVuLnNlY3JldC5rZXkua3M2ODM3MDI3MTk1NjIyODI2MjASIM9NuDIAYD0/SvAzOWPVQyWDF\n" +
+                "acizmyVRMxcgFoMY6gXGhItKB+rlYOoSfLvUuNtrjvkv7IiIFc9RkbLpqm7PorQ552VDVukg7966w2yVWiUETlFGPLVKAUwAQ==$1$$";
+        String[] array = s.split("\\$");
         System.out.println(array.length);
         System.out.println(array[0]);
         System.out.println(array[1]);

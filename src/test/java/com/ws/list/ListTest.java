@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
@@ -265,6 +266,29 @@ public class ListTest extends TestCase {
         copyList.get(0).setId("30");
 
         System.out.println(list);
+    }
+
+
+    @Test
+    public void testIntersection() {
+        List<Long> list1 = new ArrayList<>();
+        list1.add(1L);
+        list1.add(3L);
+        list1.add(5L);
+
+        List<Long> list2 = new ArrayList<>();
+        list2.add(2L);
+        list2.add(3L);
+        list2.add(4L);
+
+
+        List<Long> list3 = new ArrayList<>();
+        list3.add(1L);
+        list3.add(5L);
+        list3.add(8L);
+        Collection c1 = CollectionUtils.intersection(list1, list2);
+        Collection intersection = CollectionUtils.intersection(c1, list3);
+        System.out.println(intersection);
     }
 
 }

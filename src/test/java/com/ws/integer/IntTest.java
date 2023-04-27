@@ -17,4 +17,16 @@ public class IntTest extends TestCase {
     private void process(String i) {
         i = "bb";
     }
+
+
+    @Test
+    public void testLong() {
+        long a = 1000;
+        long b = 800;
+        long result = a / b;
+        System.out.println(result);
+    }
 }
+
+
+
