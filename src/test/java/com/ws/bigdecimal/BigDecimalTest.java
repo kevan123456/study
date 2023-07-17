@@ -17,4 +17,17 @@ public class BigDecimalTest extends TestCase {
         System.out.println("volume:" + volume);
     }
 
+    @Test
+    public void testCompareTo() {
+        BigDecimal formulaDecimal = new BigDecimal("0.7");
+        int i = formulaDecimal.compareTo(BigDecimal.ZERO);
+        if (i == -1) {
+            System.out.println("小于");
+        } else if (i == 0) {
+            System.out.println("等于");
+        } else if (i == 1) {
+            System.out.println("大于");
+        }
+    }
+
 }
