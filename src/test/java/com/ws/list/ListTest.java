@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -289,6 +290,17 @@ public class ListTest extends TestCase {
         Collection c1 = CollectionUtils.intersection(list1, list2);
         Collection intersection = CollectionUtils.intersection(c1, list3);
         System.out.println(intersection);
+    }
+
+    @Test
+    public void testLinkedList() {
+        LinkedList<Integer> temp = new LinkedList();
+        temp.push(1);
+        temp.push(2);
+        temp.push(3);
+
+
+        System.out.printf("temp->" + temp.pop());
     }
 
 }
