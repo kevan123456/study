@@ -299,8 +299,10 @@ public class ListTest extends TestCase {
         temp.push(2);
         temp.push(3);
 
+        for (Integer a : temp) {
+            System.out.println("a->" + a);
+        }
 
-        System.out.println("temp->" + temp.pop());
     }
 
 }
