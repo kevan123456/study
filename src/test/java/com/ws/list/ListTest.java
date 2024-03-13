@@ -300,7 +300,7 @@ public class ListTest extends TestCase {
         temp.push(3);
 
 
-        System.out.printf("temp->" + temp.pop());
+        System.out.println("temp->" + temp.pop());
     }
 
 }
