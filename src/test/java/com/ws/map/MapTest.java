@@ -7,6 +7,7 @@ import org.junit.Test;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class MapTest extends TestCase {
 
@@ -39,5 +40,17 @@ public class MapTest extends TestCase {
         for (Map.Entry<String, Long> entry : map.entrySet()) {
             System.out.println(entry.getKey());
         }
+    }
+
+
+    @Test
+    public void testPut() {
+        Map<String, String> map = new ConcurrentHashMap<>();
+        map.put("a", "1");
+        map.put("b", "2");
+
+        map.get("a");
+
+        System.out.println(map);
     }
 }
