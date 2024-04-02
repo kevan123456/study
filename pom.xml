@@ -15,6 +15,7 @@
         <zkclient.version>0.11</zkclient.version>
         <jackson.version>2.10.0</jackson.version>
         <jol.version>0.9</jol.version>
+        <alibaba.cloud.version>2.0.4.RELEASE</alibaba.cloud.version>
     </properties>
 
     <dependencies>
@@ -87,6 +88,11 @@
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
             <version>${druid.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+            <version>${alibaba.cloud.version}</version>
         </dependency>
         <!-- AspectJ -->
         <dependency>
