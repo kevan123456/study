@@ -4,9 +4,11 @@
 package com.ws.netty.nio;
 
 import java.net.InetSocketAddress;
+import java.nio.ByteBuffer;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
+import java.nio.channels.SocketChannel;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -39,7 +41,25 @@ public class NioSelectorService {
             //遍历SelectionKey对事件处理
             while (iter.hasNext()) {
                 SelectionKey key = iter.next();
-                
+                if (key.isAcceptable()) {
+                    ServerSocketChannel server = (ServerSocketChannel) key.channel();
+                    SocketChannel socketChannel = server.accept();
+                    socketChannel.configureBlocking(false);
+                    //这里只注册的读事件，如果需要个客户端发送数据可以注册写事件
+                    SelectionKey selKey = socketChannel.register(selector, SelectionKey.OP_READ);
+                    System.out.printf("客户端链接成功");
+                } else if (key.isReadable()) {
+                    SocketChannel socketChannel = (SocketChannel) key.channel();
+                    ByteBuffer byteBuffer = ByteBuffer.allocate(128);
+                    int len = socketChannel.read(byteBuffer);
+                    if (len > 0) {
+                        System.out.printf("接受到消息：" + new String(byteBuffer.array()));
+                    } else if (len == -1) {
+                        System.out.printf("客户端端口链接");
+                        socketChannel.close();
+                    }
+                }
+
             }
         }
     }
