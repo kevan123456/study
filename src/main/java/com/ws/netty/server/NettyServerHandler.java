@@ -38,7 +38,6 @@ public class NettyServerHandler extends SimpleChannelInboundHandler<String> {
         System.out.println("channelGroup size" + channelGroup.size() + "\n");
     }
 
-
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, String msg) {
         Channel channel = ctx.channel();
