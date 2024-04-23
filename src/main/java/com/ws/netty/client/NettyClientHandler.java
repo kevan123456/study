@@ -3,8 +3,11 @@
  */
 package com.ws.netty.client;
 
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
+import io.netty.util.CharsetUtil;
 
 /**
  * @author wangshun
@@ -12,13 +15,13 @@ import io.netty.channel.SimpleChannelInboundHandler;
  * @see
  * @since 1.0.0
  */
-public class ChatClientHandler extends SimpleChannelInboundHandler<String> {
+public class NettyClientHandler extends SimpleChannelInboundHandler<String> {
 
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) {
-        //ByteBuf buf = Unpooled.copiedBuffer("Hello".getBytes(CharsetUtil.UTF_8));
-        //ctx.writeAndFlush(buf);
+        ByteBuf buf = Unpooled.copiedBuffer("HelloServer".getBytes(CharsetUtil.UTF_8));
+        ctx.writeAndFlush(buf);
     }
 
     @Override

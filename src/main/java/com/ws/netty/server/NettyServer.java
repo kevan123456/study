@@ -43,7 +43,7 @@ public class NettyServer {
                                     //加入编码器
                                     pipeline.addLast("encoder", new StringEncoder());
                                     //加入自己的业务
-                                    pipeline.addLast(new ChatServerHandler());
+                                    pipeline.addLast(new NettyServerHandler());
                                 }
                             });
             System.out.println("netty server start");

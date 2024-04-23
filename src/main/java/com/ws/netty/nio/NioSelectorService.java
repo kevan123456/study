@@ -59,7 +59,8 @@ public class NioSelectorService {
                         socketChannel.close();
                     }
                 }
-
+                //从事件集合里删除本次处理的key，防止下次selector重复处理
+                iter.remove();
             }
         }
     }

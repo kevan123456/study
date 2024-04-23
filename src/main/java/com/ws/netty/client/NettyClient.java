@@ -23,7 +23,7 @@ import java.util.Scanner;
  * @see
  * @since 1.0.0
  */
-public class ChatClient {
+public class NettyClient {
 
     public static void main(String[] args) throws Exception {
         EventLoopGroup group = new NioEventLoopGroup();
@@ -40,7 +40,7 @@ public class ChatClient {
                             //加入编码器
                             pipeline.addLast("encoder", new StringEncoder());
                             //加入自己的业务
-                            pipeline.addLast(new ChatClientHandler());
+                            pipeline.addLast(new NettyClientHandler());
                         }
                     });
             ChannelFuture future = bootstrap.connect("127.0.0.1", 9999).sync();
