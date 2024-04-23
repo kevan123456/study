@@ -28,11 +28,7 @@ public class NettyClientHandler extends SimpleChannelInboundHandler<String> {
     public void channelInactive(ChannelHandlerContext ctx) {
 
     }
-
-    @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg) {
-
-    }
+    
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, String msg) {

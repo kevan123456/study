@@ -38,10 +38,6 @@ public class NettyServerHandler extends SimpleChannelInboundHandler<String> {
         System.out.println("channelGroup size" + channelGroup.size() + "\n");
     }
 
-    @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg) {
-        System.out.println("收到客户端消息：" + msg.toString());
-    }
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, String msg) {
@@ -53,11 +49,5 @@ public class NettyServerHandler extends SimpleChannelInboundHandler<String> {
                 ch.writeAndFlush("[自己],发送消息:" + msg + "\n");
             }
         });
-    }
-
-
-    @Override
-    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-        super.exceptionCaught(ctx, cause);
     }
 }
