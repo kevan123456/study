@@ -26,9 +26,9 @@ public class ByteBufferTest extends TestBase {
 
     @Test
     public void testAllocate() {
-        //虚拟机堆内存
+        //虚拟机堆内存，读写效率低，受到GC影响
         ByteBuffer byteBuffer1 = ByteBuffer.allocate(10);
-        //直接内存，减少拷贝次数，更快，但是分配内存效率低
+        //直接内存，减少拷贝次数，读写效率高，不受GC影响。但是分配内存效率低
         ByteBuffer byteBuffer2 = ByteBuffer.allocateDirect(10);
         System.out.println(byteBuffer1.getClass());
         System.out.println(byteBuffer2.getClass());
