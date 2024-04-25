@@ -175,7 +175,7 @@ public class ByteBufferTest extends TestBase {
     private void split(ByteBuffer source) {
         source.flip();
         for (int i = 0; i < source.limit(); i++) {
-            //找到完整消息
+            //找到完整消息，这个查找效率较低
             if (source.get(i) == '\n') {
                 int length = i + 1 - source.position();
                 ByteBuffer target = ByteBuffer.allocate(length);
