@@ -1,0 +1,93 @@
+/*
+ * Copyright (C) 2018-2022 Hangzhou JuLingShou Intelligent Technology Co., Ltd. All rights reserved
+ */
+package com.ws.netty.nio;
+
+import com.ws.base.TestBase;
+import com.ws.util.ByteBufferUtil;
+import org.junit.Test;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
+import java.nio.channels.FileChannel;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+
+/**
+ * @author wangshun
+ * @date 2024-04-25
+ * @see
+ * @since 1.0.0
+ */
+public class ByteBufferTest extends TestBase {
+
+    @Test
+    public void testAllocate() {
+        //虚拟机内存
+        ByteBuffer byteBuffer1 = ByteBuffer.allocate(10);
+        //直接内存，减少拷贝次数，更快，但是分配内存效率低
+        ByteBuffer byteBuffer2 = ByteBuffer.allocateDirect(10);
+        System.out.println(byteBuffer1.getClass());
+        System.out.println(byteBuffer2.getClass());
+    }
+
+    @Test
+    public void testFileChannel() {
+        try (FileChannel fileChannel = new FileInputStream("data.txt").getChannel()) {
+            ByteBuffer byteBuffer = ByteBuffer.allocate(10);
+
+
+        } catch (IOException e) {
+
+        }
+    }
+
+
+    @Test
+    public void testFlip() {
+        ByteBuffer byteBuffer = ByteBuffer.allocate(10);
+        // a
+        byteBuffer.put((byte) 0x61);
+        //b
+        byteBuffer.put((byte) 0x62);
+        //c
+        byteBuffer.put((byte) 0x63);
+        ByteBufferUtil.debugAll(byteBuffer);
+
+
+        //System.out.println(byteBuffer.get());
+        //必须切换读模式
+        byteBuffer.flip();
+        System.out.println(byteBuffer.get());
+        ByteBufferUtil.debugAll(byteBuffer);
+    }
+
+    @Test
+    public void testEnCode() {
+        ByteBuffer byteBuffer1 = StandardCharsets.UTF_8.encode("你好");
+        ByteBuffer byteBuffer2 = Charset.forName("utf-8").encode("哈哈");
+        ByteBuffer byteBuffer3 = ByteBuffer.allocate(10);
+        byteBuffer3.put("你好".getBytes());
+
+        ByteBufferUtil.debugAll(byteBuffer1);
+        ByteBufferUtil.debugAll(byteBuffer2);
+        ByteBufferUtil.debugAll(byteBuffer3);
+
+        CharBuffer charBuffer1 = StandardCharsets.UTF_8.decode(byteBuffer1);
+        System.out.println(charBuffer1.getClass());
+        System.out.println(charBuffer1.toString());
+
+        CharBuffer charBuffer2 = Charset.forName("utf-8").decode(byteBuffer2);
+        System.out.println(charBuffer2.getClass());
+        System.out.println(charBuffer2.toString());
+
+        //必须切换读模式
+        byteBuffer3.flip();
+        CharBuffer charBuffer3 = Charset.forName("utf-8").decode(byteBuffer3);
+        System.out.println(charBuffer3.getClass());
+        System.out.println(charBuffer3.toString());
+    }
+
+}
