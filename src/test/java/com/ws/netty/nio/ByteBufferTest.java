@@ -37,6 +37,18 @@ public class ByteBufferTest extends TestBase {
     public void testFileChannel() {
         try (FileChannel fileChannel = new FileInputStream("data.txt").getChannel()) {
             ByteBuffer byteBuffer = ByteBuffer.allocate(10);
+            int len;
+            do {
+                len = fileChannel.read(byteBuffer);
+                //切换为读模式
+                byteBuffer.flip();
+                while (byteBuffer.hasRemaining()) {
+                    byte b = byteBuffer.get();
+                    System.out.println((char) b);
+                }
+                //切换为写模式
+                byteBuffer.clear();
+            } while (len != -1);
 
 
         } catch (IOException e) {
