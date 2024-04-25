@@ -176,6 +176,8 @@ public class ByteBufferTest extends TestBase {
         source.flip();
         for (int i = 0; i < source.limit(); i++) {
             //找到完整消息，这个查找效率较低
+            //HTTP2.0用的LTV格式固定长度（包含后面数据长度）+真实数据
+            //HTTP1.0用的TLV
             if (source.get(i) == '\n') {
                 int length = i + 1 - source.position();
                 ByteBuffer target = ByteBuffer.allocate(length);

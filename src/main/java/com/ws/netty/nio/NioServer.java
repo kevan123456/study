@@ -62,7 +62,8 @@ public class NioServer {
                         //拆包,这里会丢失数据没有读到指定内容就超过buffer,所以需要扩容
                         split(byteBuffer, '\n');
                         if (byteBuffer.position() == byteBuffer.limit()) {
-                            //扩容，但是没有缩容
+                            //扩容，但是没有缩容。拷贝性能损耗
+                            //还有一种思路多个数据组成buffer，一个数组不够用新的数组存储，缺点：存储不连续解析复杂
                             ByteBuffer newByteBuffer = ByteBuffer.allocate(byteBuffer.capacity() * 2);
                             byteBuffer.flip();
                             newByteBuffer.put(byteBuffer);
