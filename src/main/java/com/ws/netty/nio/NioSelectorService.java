@@ -55,7 +55,7 @@ public class NioSelectorService {
                     if (len > 0) {
                         System.out.printf("接受到消息：" + new String(byteBuffer.array()));
                     } else if (len == -1) {
-                        System.out.printf("客户端端口链接");
+                        System.out.printf("客户端断开链接");
                         socketChannel.close();
                     }
                 }
