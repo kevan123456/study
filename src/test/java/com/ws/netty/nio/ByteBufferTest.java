@@ -117,7 +117,7 @@ public class ByteBufferTest extends TestBase {
      * 分散读，集中写
      */
     @Test
-    public void testScattering() {
+    public void testScatteringRead() {
         try (RandomAccessFile file = new RandomAccessFile("data.txt", "rw")) {
             FileChannel channel = file.getChannel();
             ByteBuffer byteBuffer1 = ByteBuffer.allocate(7);
@@ -132,6 +132,20 @@ public class ByteBufferTest extends TestBase {
             ByteBufferUtil.debugAll(byteBuffer2);
             ByteBufferUtil.debugAll(byteBuffer3);
 
+        } catch (IOException e) {
+
+        }
+    }
+
+    @Test
+    public void testScatteringWrite() {
+        ByteBuffer byteBuffer1 = StandardCharsets.UTF_8.encode("hello");
+        ByteBuffer byteBuffer2 = StandardCharsets.UTF_8.encode("world");
+        ByteBuffer byteBuffer3 = StandardCharsets.UTF_8.encode("你好");
+
+        try (RandomAccessFile file = new RandomAccessFile("data2.txt", "rw")) {
+            FileChannel channel = file.getChannel();
+            channel.write(new ByteBuffer[]{byteBuffer1, byteBuffer2, byteBuffer3});
         } catch (IOException e) {
 
         }
