@@ -47,6 +47,7 @@ public class NioServer {
                     ServerSocketChannel server = (ServerSocketChannel) key.channel();
                     SocketChannel socketChannel = server.accept();
                     socketChannel.configureBlocking(false);
+                    //不能被多个channel公用
                     ByteBuffer byteBufferAtt = ByteBuffer.allocate(4);
                     //这里只注册的读事件，如果需要个客户端发送数据可以注册写事件
                     SelectionKey selKey = socketChannel.register(selector, SelectionKey.OP_READ, byteBufferAtt);
@@ -61,7 +62,7 @@ public class NioServer {
                         //拆包,这里会丢失数据没有读到指定内容就超过buffer,所以需要扩容
                         split(byteBuffer, '\n');
                         if (byteBuffer.position() == byteBuffer.limit()) {
-                            //扩容
+                            //扩容，但是没有缩容
                             ByteBuffer newByteBuffer = ByteBuffer.allocate(byteBuffer.capacity() * 2);
                             byteBuffer.flip();
                             newByteBuffer.put(byteBuffer);
