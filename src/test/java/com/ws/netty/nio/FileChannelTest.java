@@ -52,6 +52,7 @@ public class FileChannelTest extends TestBase {
             //效率高，使用操作系统零拷贝，只能传输2G
             long size = in.size();
             for (long left = size; left > 0; ) {
+                System.out.println("position:" + (size - left) + ";left:" + left);
                 left -= in.transferTo((size - left), left, out);
             }
 
