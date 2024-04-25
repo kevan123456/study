@@ -21,7 +21,7 @@ import java.util.Objects;
  * @since 1.0.0
  */
 public class AsynchronousFileChannelTest extends TestBase {
-
+    //protected Logger log = Logger.getInstance(getClass());
     /**
      *
      */
@@ -52,6 +52,8 @@ public class AsynchronousFileChannelTest extends TestBase {
                 }
             });
             System.out.println("end read");
+            //因为AsynchronousFileChannel是守护线程方式运行的，所以一定要主线程运行
+            System.in.read();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
