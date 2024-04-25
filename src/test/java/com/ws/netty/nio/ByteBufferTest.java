@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.channels.FileChannel;
@@ -25,7 +26,7 @@ public class ByteBufferTest extends TestBase {
 
     @Test
     public void testAllocate() {
-        //虚拟机内存
+        //虚拟机堆内存
         ByteBuffer byteBuffer1 = ByteBuffer.allocate(10);
         //直接内存，减少拷贝次数，更快，但是分配内存效率低
         ByteBuffer byteBuffer2 = ByteBuffer.allocateDirect(10);
@@ -33,6 +34,10 @@ public class ByteBufferTest extends TestBase {
         System.out.println(byteBuffer2.getClass());
     }
 
+
+    /**
+     * 从文件管道读
+     */
     @Test
     public void testFileChannel() {
         try (FileChannel fileChannel = new FileInputStream("data.txt").getChannel()) {
@@ -42,6 +47,8 @@ public class ByteBufferTest extends TestBase {
                 len = fileChannel.read(byteBuffer);
                 //切换为读模式
                 byteBuffer.flip();
+
+                //判断是否还有数据
                 while (byteBuffer.hasRemaining()) {
                     byte b = byteBuffer.get();
                     System.out.println((char) b);
@@ -76,6 +83,9 @@ public class ByteBufferTest extends TestBase {
         ByteBufferUtil.debugAll(byteBuffer);
     }
 
+    /**
+     * 字符串与ByteBuffer互相转换
+     */
     @Test
     public void testEnCode() {
         ByteBuffer byteBuffer1 = StandardCharsets.UTF_8.encode("你好");
@@ -101,5 +111,31 @@ public class ByteBufferTest extends TestBase {
         System.out.println(charBuffer3.getClass());
         System.out.println(charBuffer3.toString());
     }
+
+
+    /**
+     * 分散读，集中写
+     */
+    @Test
+    public void testScattering() {
+        try (RandomAccessFile file = new RandomAccessFile("data.txt", "rw")) {
+            FileChannel channel = file.getChannel();
+            ByteBuffer byteBuffer1 = ByteBuffer.allocate(7);
+            ByteBuffer byteBuffer2 = ByteBuffer.allocate(3);
+            ByteBuffer byteBuffer3 = ByteBuffer.allocate(5);
+            channel.read(new ByteBuffer[]{byteBuffer1, byteBuffer2, byteBuffer3});
+
+            byteBuffer1.flip();
+            byteBuffer2.flip();
+            byteBuffer3.flip();
+            ByteBufferUtil.debugAll(byteBuffer1);
+            ByteBufferUtil.debugAll(byteBuffer2);
+            ByteBufferUtil.debugAll(byteBuffer3);
+
+        } catch (IOException e) {
+
+        }
+    }
+
 
 }
