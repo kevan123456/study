@@ -41,7 +41,7 @@ public class AsynchronousFileChannelTest extends TestBase {
             fileChannel.read(byteBuffer, 0, byteBuffer, new CompletionHandler<Integer, ByteBuffer>() {
                 @Override
                 public void completed(Integer result, ByteBuffer attachment) {
-                    System.out.println("begin completed");
+                    System.out.println("completed read");
                     attachment.flip();
                     ByteBufferUtil.debugAll(attachment);
                 }
