@@ -7,6 +7,7 @@ import com.ws.base.TestBase;
 import org.junit.Test;
 
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
 
@@ -25,7 +26,7 @@ public class FileChannelTest extends TestBase {
     public void testTransferTo() {
         try (
                 FileChannel in = new FileInputStream("data.txt").getChannel();
-                FileChannel out = new FileInputStream("to.txt").getChannel();
+                FileChannel out = new FileOutputStream("to.txt").getChannel();
 
         ) {
             //效率高，使用操作系统零拷贝，只能传输2G
@@ -45,7 +46,7 @@ public class FileChannelTest extends TestBase {
     public void testTransferToMore() {
         try (
                 FileChannel in = new FileInputStream("data.txt").getChannel();
-                FileChannel out = new FileInputStream("to.txt").getChannel();
+                FileChannel out = new FileOutputStream("to.txt").getChannel();
 
         ) {
             //效率高，使用操作系统零拷贝，只能传输2G
