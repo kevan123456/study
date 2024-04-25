@@ -22,14 +22,14 @@ public class NioSelectorService {
 
     public static void main(String[] args) throws Exception {
         ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();
-        serverSocketChannel.bind(new InetSocketAddress(9000));
+        serverSocketChannel.bind(new InetSocketAddress(9999));
         //设置ServerSocketChannel为非阻塞
         serverSocketChannel.configureBlocking(false);
         //打开Selector处理Channel，即创建epoll
         Selector selector = Selector.open();
         //把设置ServerSocketChannel注册到Selector上，并且Selector对客户端accept连接操作感兴趣
         SelectionKey selectionKey = serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);
-        System.out.printf("服务启动成功。。。。。");
+        System.out.printf("服务启动成功。。。。。\n");
         while (true) {
             //阻塞等待要处理的事件发生
             selector.select();
@@ -50,10 +50,10 @@ public class NioSelectorService {
                     System.out.printf("客户端链接成功\n");
                 } else if (key.isReadable()) {
                     SocketChannel socketChannel = (SocketChannel) key.channel();
-                    ByteBuffer byteBuffer = ByteBuffer.allocate(128);
+                    ByteBuffer byteBuffer = ByteBuffer.allocate(4);
                     int len = socketChannel.read(byteBuffer);
                     if (len > 0) {
-                        System.out.printf("接受到消息：" + new String(byteBuffer.array()));
+                        System.out.printf("接受到消息：" + new String(byteBuffer.array()) + "\n");
                     } else if (len == -1) {
                         System.out.printf("客户端断开链接\n");
                         socketChannel.close();

@@ -31,7 +31,7 @@ public class NioServer {
         Selector selector = Selector.open();
         //把设置ServerSocketChannel注册到Selector上，并且Selector对客户端accept连接操作感兴趣
         SelectionKey selectionKey = serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);
-        System.out.printf("服务启动成功。。。。。");
+        System.out.printf("服务启动成功。。。。。\n");
         while (true) {
             //阻塞等待要处理的事件发生
             selector.select();
@@ -47,17 +47,26 @@ public class NioServer {
                     ServerSocketChannel server = (ServerSocketChannel) key.channel();
                     SocketChannel socketChannel = server.accept();
                     socketChannel.configureBlocking(false);
+                    ByteBuffer byteBufferAtt = ByteBuffer.allocate(4);
                     //这里只注册的读事件，如果需要个客户端发送数据可以注册写事件
-                    SelectionKey selKey = socketChannel.register(selector, SelectionKey.OP_READ);
+                    SelectionKey selKey = socketChannel.register(selector, SelectionKey.OP_READ, byteBufferAtt);
                     System.out.printf("客户端链接成功\n");
                 } else if (key.isReadable()) {
                     SocketChannel socketChannel = (SocketChannel) key.channel();
-                    ByteBuffer byteBuffer = ByteBuffer.allocate(4);
+                    //从附件里去
+                    ByteBuffer byteBuffer = (ByteBuffer) key.attachment();
                     int len = socketChannel.read(byteBuffer);
                     if (len > 0) {
                         System.out.printf("接受到消息：" + new String(byteBuffer.array()) + "\n");
-                        //拆包,这里会丢失数据没有读到指定内容就超过buffer
+                        //拆包,这里会丢失数据没有读到指定内容就超过buffer,所以需要扩容
                         split(byteBuffer, '\n');
+                        if (byteBuffer.position() == byteBuffer.limit()) {
+                            //扩容
+                            ByteBuffer newByteBuffer = ByteBuffer.allocate(byteBuffer.capacity() * 2);
+                            byteBuffer.flip();
+                            newByteBuffer.put(byteBuffer);
+                            key.attach(newByteBuffer);
+                        }
 
                     } else if (len == -1) {
                         System.out.printf("客户端断开链接\n");
