@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+	<include resource="org/springframework/boot/logging/logback/base.xml"/>
+
+	<property name="LOG_HOME" value="/data/logs/study"/>
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<target>System.out</target>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>%d %-5level %thread %logger{36} - %msg%n</pattern>
+		</layout>
+	</appender>
+
+	<!--
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%date{HH:mm:ss} [%-5level] [%thread] %logger(17) - %m%n</pattern>
+		</encoder>
+	</appender>
+	-->
+
+	<appender name="ALL" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_HOME}/biz-all.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_HOME}/biz-all.%d{yyyy-MM-dd}.log.zip
+			</fileNamePattern>
+		</rollingPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>%d %-5level %logger{36} - %msg%n</pattern>
+		</layout>
+	</appender>
+
+	<appender name="ERROR_APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class="com.geekint.honey.base.logger.ERRORLevelFilter"/>
+		<file>${LOG_HOME}/biz-error.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_HOME}/biz-error.%d{yyyy-MM-dd}.log.zip
+			</fileNamePattern>
+		</rollingPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>%d %-5level %logger{36} - %msg%n</pattern>
+		</layout>
+	</appender>
+
+	<!--
+	<logger name="com" level="DEBUG" additivity="true">
+		<appender-ref ref="ERROR_APPENDER"/>
+	</logger>
+	-->
+	<logger name="com.ws" level="DEBUG" additivity="false">
+		<appender-ref ref="STDOUT"/>
+	</logger>
+
+	<logger name="com.alibaba" level="INFO" additivity="true"/>
+
+	<root level="INFO">
+		<appender-ref ref="ALL"/>
+		<appender-ref ref="STDOUT"/>
+	</root>
+</configuration>

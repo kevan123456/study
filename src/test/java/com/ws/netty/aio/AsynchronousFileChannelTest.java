@@ -5,6 +5,7 @@ package com.ws.netty.aio;
 
 import com.ws.base.TestBase;
 import com.ws.util.ByteBufferUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
 import java.nio.ByteBuffer;
@@ -20,8 +21,9 @@ import java.util.Objects;
  * @see
  * @since 1.0.0
  */
+@Slf4j
 public class AsynchronousFileChannelTest extends TestBase {
-    //protected Logger log = Logger.getInstance(getClass());
+
     /**
      *
      */
@@ -31,7 +33,8 @@ public class AsynchronousFileChannelTest extends TestBase {
         try {
             fileChannel = AsynchronousFileChannel.open(Paths.get("data.txt"), StandardOpenOption.READ);
             ByteBuffer byteBuffer = ByteBuffer.allocate(4);
-            System.out.println("begin read");
+            //System.out.println("begin read");
+            log.debug("begin read");
             /**
              * 参数1：byteBuffer
              * 参数2：读取的起始位置
@@ -41,7 +44,8 @@ public class AsynchronousFileChannelTest extends TestBase {
             fileChannel.read(byteBuffer, 0, byteBuffer, new CompletionHandler<Integer, ByteBuffer>() {
                 @Override
                 public void completed(Integer result, ByteBuffer attachment) {
-                    System.out.println("completed read");
+                    //System.out.println("completed read");
+                    log.debug("completed read");
                     attachment.flip();
                     ByteBufferUtil.debugAll(attachment);
                 }
@@ -51,7 +55,8 @@ public class AsynchronousFileChannelTest extends TestBase {
 
                 }
             });
-            System.out.println("end read");
+            //System.out.println("end read");
+            log.debug("end read");
             //因为AsynchronousFileChannel是守护线程方式运行的，所以一定要主线程运行
             System.in.read();
         } catch (Exception e) {
