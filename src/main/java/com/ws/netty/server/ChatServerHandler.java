@@ -17,7 +17,7 @@ import io.netty.util.concurrent.GlobalEventExecutor;
  * @see
  * @since 1.0.0
  */
-public class NettyServerHandler extends SimpleChannelInboundHandler<String> {
+public class ChatServerHandler extends SimpleChannelInboundHandler<String> {
 
     private static ChannelGroup channelGroup = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
 

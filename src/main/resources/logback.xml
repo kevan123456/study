@@ -27,12 +27,12 @@
 			</fileNamePattern>
 		</rollingPolicy>
 		<layout class="ch.qos.logback.classic.PatternLayout">
-			<pattern>%d %-5level %logger{36} - %msg%n</pattern>
+			<pattern>%d %-5level %loggech.qos.logback.core.rolling.SizeAndTimeBasr{36} - %msg%n</pattern>
 		</layout>
 	</appender>
 
 	<appender name="ERROR_APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<filter class="com.geekint.honey.base.logger.ERRORLevelFilter"/>
+		<!--<filter class="com.geekint.honey.base.logger.ERRORLevelFilter"/>-->
 		<file>${LOG_HOME}/biz-error.log</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
 			<fileNamePattern>${LOG_HOME}/biz-error.%d{yyyy-MM-dd}.log.zip

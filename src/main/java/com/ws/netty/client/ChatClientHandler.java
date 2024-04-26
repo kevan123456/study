@@ -15,7 +15,7 @@ import io.netty.util.CharsetUtil;
  * @see
  * @since 1.0.0
  */
-public class NettyClientHandler extends SimpleChannelInboundHandler<String> {
+public class ChatClientHandler extends SimpleChannelInboundHandler<String> {
 
 
     @Override
@@ -28,7 +28,7 @@ public class NettyClientHandler extends SimpleChannelInboundHandler<String> {
     public void channelInactive(ChannelHandlerContext ctx) {
 
     }
-    
+
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, String msg) {
