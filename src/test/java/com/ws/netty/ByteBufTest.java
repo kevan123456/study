@@ -18,7 +18,7 @@ import java.nio.charset.StandardCharsets;
  * @since 1.0.0
  */
 public class ByteBufTest extends TestBase {
-    
+
     /**
      * 自动扩容
      * 数据小于512，下一个选择16的整数倍
@@ -83,5 +83,18 @@ public class ByteBufTest extends TestBase {
         //回到原来
         byteBuf.resetReaderIndex();
         ByteBufUtil.log(byteBuf);
+    }
+
+    /**
+     * UnpooledHeapByteBuf使用的JVM内存，只需等待JVM回收内存即可
+     * UnpooledDirectByteBuf,需要特殊方法回收内存
+     * PooledDirectByteBuf池化机制,需要更加复杂的规则来回收内存
+     * <p>
+     * Netty采用计数器来控制回收,每个ByteBuf都实现了ReferenceCounted接口，当计数器为0时这时即便ByteBuf对象还在但是各个方法都无法正常使用
+     * TailContext尾部会释放内存，HeadContext头部会释放内存（但是中间传下去不是ByteBuf了需要最后处理的Handler释放）
+     */
+    @Test
+    public void test() {
+
     }
 }
