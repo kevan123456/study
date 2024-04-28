@@ -65,5 +65,23 @@ public class ByteBufTest extends TestBase {
         ByteBufUtil.log(byteBuf);
     }
 
+    /**
+     * 读取
+     */
+    @Test
+    public void testRead() {
+        ByteBuf byteBuf = ByteBufAllocator.DEFAULT.buffer();
+        byteBuf.writeBytes(new byte[]{1, 2, 3, 4});
+        //指针会移动
+        byteBuf.readByte();
+        ByteBufUtil.log(byteBuf);
 
+
+        byteBuf.markReaderIndex();
+        byteBuf.readByte();
+        ByteBufUtil.log(byteBuf);
+        //回到原来
+        byteBuf.resetReaderIndex();
+        ByteBufUtil.log(byteBuf);
+    }
 }
