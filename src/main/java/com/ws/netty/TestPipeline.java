@@ -93,7 +93,7 @@ public class TestPipeline {
             System.out.println("netty server start");
             ChannelFuture future = serverBootstrap.bind(9999);
             //等待服务端口关闭
-            //future.channel().closeFuture().sync();
+            future.channel().closeFuture().sync();
         } finally {
             //bossGroup.shutdownGracefully();
             //workGroup.shutdownGracefully();
