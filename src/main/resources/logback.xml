@@ -51,6 +51,9 @@
 	<logger name="com.ws" level="DEBUG" additivity="false">
 		<appender-ref ref="STDOUT"/>
 	</logger>
+	<logger name="io.netty.handler.logging.LoggingHandler" level="DEBUG" additivity="false">
+		<appender-ref ref="STDOUT"/>
+	</logger>
 
 	<logger name="com.alibaba" level="INFO" additivity="true"/>
 
