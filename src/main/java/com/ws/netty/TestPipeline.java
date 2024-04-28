@@ -55,13 +55,23 @@ public class TestPipeline {
                                             super.channelRead(ctx, msg);
                                         }
                                     });
+                                    
+                                    pipeline.addLast("h4-1", new ChannelOutboundHandlerAdapter() {
+                                        @Override
+                                        public void write(ChannelHandlerContext ctx, Object msg, ChannelPromise promise) throws Exception {
+                                            log.debug("4-1:");
+                                            super.write(ctx, msg, promise);
+                                        }
+                                    });
                                     pipeline.addLast("h3", new ChannelInboundHandlerAdapter() {
                                         @Override
                                         public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
                                             log.debug("3:");
                                             super.channelRead(ctx, msg);
-                                            //写数据才会触发ChannelOutboundHandler！
-                                            ch.writeAndFlush("1123");
+                                            //写数据才会触发ChannelOutboundHandler！，从尾部开始找出栈处理器
+                                            //ch.writeAndFlush("1123");
+                                            //从当前的前一个开始找出栈处理器
+                                            ctx.writeAndFlush("321");
                                         }
                                     });
 
