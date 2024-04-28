@@ -45,5 +45,20 @@ public class ByteBufTest extends TestBase {
         System.out.println(byteBuf.getClass());
     }
 
+    @Test
+    public void testWrite() {
+        ByteBuf byteBuf = ByteBufAllocator.DEFAULT.buffer();
+        byteBuf.writeBytes(new byte[]{1, 2, 3, 4});
+        ByteBufUtil.log(byteBuf);
+
+        //大端写入，因为Int占用4个字节，前面补0
+        byteBuf.writeInt(5);
+        ByteBufUtil.log(byteBuf);
+
+        //小端写入，因为Int占用4个字节，后面补0
+        byteBuf.writeIntLE(6);
+        ByteBufUtil.log(byteBuf);
+    }
+
 
 }
