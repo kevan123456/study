@@ -47,6 +47,9 @@ public class ByteBufTest extends TestBase {
         System.out.println(byteBuf.getClass());
     }
 
+    /**
+     * 大端写入、小端写入
+     */
     @Test
     public void testWrite() {
         ByteBuf byteBuf = ByteBufAllocator.DEFAULT.buffer();
