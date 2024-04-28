@@ -11,6 +11,8 @@ import io.netty.channel.embedded.EmbeddedChannel;
 import lombok.extern.slf4j.Slf4j;
 
 /**
+ * 用于测试channel
+ *
  * @author wangshun
  * @date 2024-04-28
  * @see
