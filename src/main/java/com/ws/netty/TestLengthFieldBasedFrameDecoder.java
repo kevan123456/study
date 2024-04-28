@@ -3,21 +3,14 @@
  */
 package com.ws.netty;
 
-import io.netty.bootstrap.ServerBootstrap;
 import io.netty.buffer.ByteBuf;
-import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInboundHandlerAdapter;
-import io.netty.channel.ChannelInitializer;
-import io.netty.channel.ChannelPipeline;
-import io.netty.channel.EventLoopGroup;
-import io.netty.channel.nio.NioEventLoopGroup;
-import io.netty.channel.socket.nio.NioServerSocketChannel;
-import io.netty.channel.socket.nio.NioSocketChannel;
+import io.netty.buffer.ByteBufAllocator;
+import io.netty.channel.embedded.EmbeddedChannel;
 import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
+import io.netty.handler.logging.LoggingHandler;
 import lombok.extern.slf4j.Slf4j;
 
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 /**
  * 解决半包粘包问题
@@ -30,55 +23,44 @@ import java.nio.charset.Charset;
 @Slf4j
 public class TestLengthFieldBasedFrameDecoder {
     public static void main(String[] args) throws Exception {
-        EventLoopGroup bossGroup = new NioEventLoopGroup(1);
-        EventLoopGroup workGroup = new NioEventLoopGroup(2);
+        /**
+         * LTC解决半包粘包问题
+         * lengthFieldOffset--长度字段偏移量
+         * lengthFieldLength--长度字段长度
+         * lengthAdjustment--长度字段为基准，还有几个字节是内容
+         * initialBytesToStrip--从头剩离几个字节
+         */
+        LengthFieldBasedFrameDecoder lengthFieldBasedFrameDecoder = new LengthFieldBasedFrameDecoder(1024, 0, 4, 0, 4);
 
-        try {
-            ServerBootstrap serverBootstrap = new ServerBootstrap();
+        //固定长度解决半包粘包问题
+        //pipeline.addLast(new FixedLengthFrameDecoder(100));
 
-            serverBootstrap.group(bossGroup, workGroup)
-                    .channel(NioServerSocketChannel.class)
-                    //.option(ChannelOption.SO_BACKLOG, 1024)
-                    .childHandler(
-                            new ChannelInitializer<NioSocketChannel>() {
-                                @Override
-                                public void initChannel(NioSocketChannel ch) {
-                                    ChannelPipeline pipeline = ch.pipeline();
-                                    //LTC解决半包粘包问题
-                                    pipeline.addLast(new LengthFieldBasedFrameDecoder(100, 0, 2, 0, 0));
+        //换行符解决半包粘包问题
+        //pipeline.addLast(new LineBasedFrameDecoder(100));
 
-                                    //固定长度解决半包粘包问题
-                                    //pipeline.addLast(new FixedLengthFrameDecoder(100));
+        //自定义换行符解决半包粘包问题
+        /*
+        ByteBuf byteBuf = ByteBufAllocator.DEFAULT.buffer() ;
+        byteBuf.setByte(0,',') ;
+        pipeline.addLast(new DelimiterBasedFrameDecoder(100,byteBuf ));
+        */
 
-                                    //换行符解决半包粘包问题
-                                    //pipeline.addLast(new LineBasedFrameDecoder(100));
+        EmbeddedChannel embeddedChannel = new EmbeddedChannel(lengthFieldBasedFrameDecoder, new LoggingHandler());
+        ByteBuf byteBuf = ByteBufAllocator.DEFAULT.buffer();
+        byteBuf.writeBytes(new byte[]{0, 'c',});
+        embeddedChannel.writeInbound(send("hello,word"));
+        embeddedChannel.writeInbound(send("hi"));
 
-                                    //自定义换行符解决半包粘包问题
-                                    /*
-                                    ByteBuf byteBuf = ByteBufAllocator.DEFAULT.buffer() ;
-                                    byteBuf.setByte(0,',') ;
-                                    pipeline.addLast(new DelimiterBasedFrameDecoder(100,byteBuf ));
-                                    */
-
-                                    pipeline.addLast(new ChannelInboundHandlerAdapter() {
-
-                                        @Override
-                                        public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-                                            ByteBuf byteBuf = (ByteBuf) msg;
-                                            log.debug("channelRead:" + byteBuf.toString(Charset.forName("utf-8")));
-                                            System.out.println("channelRead:" + byteBuf.toString(Charset.forName("utf-8")));
-                                        }
-                                    });
-                                }
-                            });
-            System.out.println("netty server start");
-            ChannelFuture future = serverBootstrap.bind(9999);
-            //等待服务端口关闭
-            future.channel().closeFuture().sync();
-        } finally {
-            //bossGroup.shutdownGracefully();
-            //workGroup.shutdownGracefully();
-            System.out.println("netty server stop");
-        }
     }
+
+    private static ByteBuf send(String s) {
+        ByteBuf byteBuf = ByteBufAllocator.DEFAULT.buffer();
+        byte[] bytes = s.getBytes(StandardCharsets.UTF_8);
+        int length = bytes.length;
+        byteBuf.writeInt(length);
+        byteBuf.writeBytes(bytes);
+        return byteBuf;
+    }
+
+
 }
