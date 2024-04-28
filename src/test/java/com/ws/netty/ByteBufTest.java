@@ -35,5 +35,16 @@ public class ByteBufTest extends TestBase {
         ByteBufUtil.log(byteBuf);
     }
 
+    /**
+     * 池化和非池化
+     * 可以启动参数设置-Dio.netty.allocator.type=unpooled|pooled}
+     */
+    @Test
+    public void testPooled() {
+        ByteBuf byteBuf = ByteBufAllocator.DEFAULT.buffer();
+        //Pooled表示池化
+        System.out.println(byteBuf.getClass());
+    }
+
 
 }
