@@ -21,6 +21,8 @@ public class ByteBufTest extends TestBase {
     
     /**
      * 自动扩容
+     * 数据小于512，下一个选择16的整数倍
+     * 数据大于512，下一个选择2的n次方
      */
     @Test
     public void testWriteBytes() {
