@@ -125,4 +125,14 @@ public class ByteBufTest extends TestBase {
         ByteBufUtil.log(b1);
     }
 
+    @Test
+    public void testDuplicate() {
+        ByteBuf byteBuf = ByteBufAllocator.DEFAULT.buffer();
+        byteBuf.writeBytes(new byte[]{1, 2, 3, 4});
+        ByteBufUtil.log(byteBuf);
+
+        ByteBuf b1 = byteBuf.duplicate();
+        ByteBufUtil.log(b1);
+    }
+
 }
