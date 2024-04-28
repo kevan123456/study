@@ -97,4 +97,26 @@ public class ByteBufTest extends TestBase {
     public void test() {
 
     }
+
+    /**
+     * 逻辑上切片
+     */
+    @Test
+    public void testSlice() {
+        ByteBuf byteBuf = ByteBufAllocator.DEFAULT.buffer();
+        byteBuf.writeBytes(new byte[]{1, 2, 3, 4});
+        ByteBufUtil.log(byteBuf);
+
+        ByteBuf b1 = byteBuf.slice(0, 2);
+        ByteBufUtil.log(b1);
+        ByteBuf b2 = byteBuf.slice(2, 2);
+        ByteBufUtil.log(b2);
+
+
+        //修改
+        b1.setByte(0, 'a');
+        ByteBufUtil.log(b1);
+        ByteBufUtil.log(byteBuf);
+    }
+
 }
