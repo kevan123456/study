@@ -7,6 +7,7 @@ import com.ws.base.TestBase;
 import com.ws.util.ByteBufUtil;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufAllocator;
+import io.netty.buffer.CompositeByteBuf;
 import org.junit.Test;
 
 import java.nio.charset.StandardCharsets;
@@ -156,4 +157,19 @@ public class ByteBufTest extends TestBase {
         ByteBufUtil.log(b1);
     }
 
+
+    /**
+     * 多个小的合成一个大的
+     */
+    @Test
+    public void testCompositeByteBuf() {
+        ByteBuf b1 = ByteBufAllocator.DEFAULT.buffer();
+        b1.writeBytes(new byte[]{1, 2});
+        ByteBuf b2 = ByteBufAllocator.DEFAULT.buffer();
+        b2.writeBytes(new byte[]{3, 4});
+        CompositeByteBuf byteBuf = ByteBufAllocator.DEFAULT.compositeBuffer();
+        byteBuf.addComponents(b1, b2);
+        ByteBufUtil.log(byteBuf);
+
+    }
 }
