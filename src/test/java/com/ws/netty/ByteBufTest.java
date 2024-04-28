@@ -125,6 +125,9 @@ public class ByteBufTest extends TestBase {
         ByteBufUtil.log(b1);
     }
 
+    /**
+     * 地址引用
+     */
     @Test
     public void testDuplicate() {
         ByteBuf byteBuf = ByteBufAllocator.DEFAULT.buffer();
@@ -132,6 +135,24 @@ public class ByteBufTest extends TestBase {
         ByteBufUtil.log(byteBuf);
 
         ByteBuf b1 = byteBuf.duplicate();
+        //修改
+        b1.setByte(0, 'a');
+        ByteBufUtil.log(byteBuf);
+        ByteBufUtil.log(b1);
+    }
+
+    /**
+     * 拷贝
+     */
+    @Test
+    public void testCopy() {
+        ByteBuf byteBuf = ByteBufAllocator.DEFAULT.buffer();
+        byteBuf.writeBytes(new byte[]{1, 2, 3, 4});
+        ByteBufUtil.log(byteBuf);
+        ByteBuf b1 = byteBuf.copy();
+        //修改
+        b1.setByte(0, 'a');
+        ByteBufUtil.log(byteBuf);
         ByteBufUtil.log(b1);
     }
 
