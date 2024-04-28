@@ -107,6 +107,7 @@ public class ByteBufTest extends TestBase {
         byteBuf.writeBytes(new byte[]{1, 2, 3, 4});
         ByteBufUtil.log(byteBuf);
 
+        //不允许后面追加数据，否则报错
         ByteBuf b1 = byteBuf.slice(0, 2);
         ByteBufUtil.log(b1);
         ByteBuf b2 = byteBuf.slice(2, 2);
@@ -117,6 +118,11 @@ public class ByteBufTest extends TestBase {
         b1.setByte(0, 'a');
         ByteBufUtil.log(b1);
         ByteBufUtil.log(byteBuf);
+
+        //原始ByteBuf释放，切片报错，可以retain()计数器加1
+        b1.retain();
+        byteBuf.release();
+        ByteBufUtil.log(b1);
     }
 
 }
