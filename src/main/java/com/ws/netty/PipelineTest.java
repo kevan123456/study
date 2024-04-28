@@ -60,6 +60,7 @@ public class PipelineTest {
                                         public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
                                             log.debug("3:");
                                             super.channelRead(ctx, msg);
+                                            //写数据才会触发ChannelOutboundHandler！
                                             ch.writeAndFlush("1123");
                                         }
                                     });
