@@ -165,10 +165,13 @@ public class ByteBufTest extends TestBase {
     public void testCompositeByteBuf() {
         ByteBuf b1 = ByteBufAllocator.DEFAULT.buffer();
         b1.writeBytes(new byte[]{1, 2});
+        ByteBufUtil.log(b1);
         ByteBuf b2 = ByteBufAllocator.DEFAULT.buffer();
         b2.writeBytes(new byte[]{3, 4});
+        ByteBufUtil.log(b2);
         CompositeByteBuf byteBuf = ByteBufAllocator.DEFAULT.compositeBuffer();
-        byteBuf.addComponents(b1, b2);
+        //带上增长指针
+        byteBuf.addComponents(true, b1, b2);
         ByteBufUtil.log(byteBuf);
 
     }
