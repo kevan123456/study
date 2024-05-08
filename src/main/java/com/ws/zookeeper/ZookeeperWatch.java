@@ -41,6 +41,7 @@ public class ZookeeperWatch {
                 Event.KeeperState state = watchedEvent.getState();
                 System.out.println("path:" + path + ";eventType" + eventType + ";state" + state);
                 if (path == null && Event.EventType.None.equals(eventType) && Event.KeeperState.SyncConnected.equals(state)) {
+                    System.out.println("第一次连接业务逻辑。。。");
                     countDownLatch.countDown();
                 } else if (path.equals(ZK_PATH) && Event.EventType.NodeDeleted.equals(eventType)) {
                     //删除业务逻辑
