@@ -1,9 +1,8 @@
 /*
  * Copyright (C) 2018-2022 Hangzhou JuLingShou Intelligent Technology Co., Ltd. All rights reserved
  */
-package com.ws.service.impl;
+package com.ws.service;
 
-import com.ws.service.AopService;
 import org.springframework.stereotype.Service;
 
 /**
@@ -12,17 +11,15 @@ import org.springframework.stereotype.Service;
  * @see
  * @since 1.0.0
  */
-@Service("aopService")
-public class AopServiceImpl implements AopService {
+@Service
+public class AopNoInterfaceService {
 
-    @Override
     public String getById(Long id) {
         //int r = 1 / 0;
-        return "1";
+        return "8";
     }
 
-    @Override
     public String getNameById(Long id) {
-        return "kevan";
+        return "miaomiao";
     }
 }

@@ -3,6 +3,7 @@
  */
 package com.ws.spring;
 
+import com.ws.service.AopNoInterfaceService;
 import com.ws.service.AopService;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -24,13 +25,29 @@ public class SpringAOPTest {
         AopService a = (AopService) applicationContext.getBean("aopService");
 
         String result = a.getById(2L);
-        System.out.println("testGetBean" + result);
+        System.out.println("testGetBean:" + result);
 
 
         System.out.println("===================");
 
         String name = a.getNameById(2L);
-        System.out.println("testGetBean" + name);
+        System.out.println("testGetBean:" + name);
+
+    }
+
+    @Test
+    public void testNoInterface() {
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext(CONTEXT);
+        AopNoInterfaceService a = (AopNoInterfaceService) applicationContext.getBean("aopNoInterfaceService");
+
+        String result = a.getById(2L);
+        System.out.println("testGetBean:" + result);
+
+
+        System.out.println("===================");
+
+        String name = a.getNameById(2L);
+        System.out.println("testGetBean:" + name);
 
     }
 }

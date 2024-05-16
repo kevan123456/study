@@ -29,7 +29,7 @@
     <bean id="cycleB" class="com.ws.service.impl.CycleBImpl">
         <property name="cycleA" ref="cycleA"/>
     </bean>
-    <bean id="aopService" class="com.ws.service.impl.AopServiceImpl"/>
     <bean id="aopServiceAspect" class="com.ws.spring.aop.AopServiceAspect"/>
+    <bean id="aopNoInterfaceServiceAspect" class="com.ws.spring.aop.AopNoInterfaceServiceAspect"/>
 
 </beans>
