@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:redisson="http://redisson.org/schema/redisson"
        xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://redisson.org/schema/redisson
+       http://redisson.org/schema/redisson/redisson.xsd
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context.xsd">
 
@@ -13,6 +16,26 @@
     <import resource="classpath:spring-bean.xml"/>
 
     <import resource="dataSource.xml"/>
+
+    <!--单台redis机器配置-->
+    <redisson:client id="redissonClient">
+        <!--<redisson:single-server password="${redis.auth}" address="${redis.host}:${redis.port}"/>-->
+        <redisson:single-server address="redis://${redis.host}:${redis.port}"/>
+    </redisson:client>
+
+    <!--redis集群配置-->
+    <!--
+            <redisson:client id="redissonClient">
+                    <redisson:cluster-server sscan-interval="10000">&lt;!&ndash;//scan-interval:集群状态扫描间隔时间，单位是毫秒&ndash;&gt;
+                            <redisson:node-address value="192.168.2.100:7000"/>
+                            <redisson:node-address value="192.168.2.100:7001"/>
+                            <redisson:node-address value="192.168.2.100:7002"/>
+                            <redisson:node-address value="192.168.2.100:7003"/>
+                            <redisson:node-address value="192.168.2.100:7004"/>
+                            <redisson:node-address value="192.168.2.100:7005"/>
+                    </redisson:cluster-servers>
+            </redisson:client>
+    -->
 
     <!--设置jedisPool链接池的配置-->
     <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
