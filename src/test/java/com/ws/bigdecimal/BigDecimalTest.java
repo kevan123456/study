@@ -4,6 +4,7 @@ import junit.framework.TestCase;
 import org.junit.Test;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class BigDecimalTest extends TestCase {
 
@@ -28,6 +29,13 @@ public class BigDecimalTest extends TestCase {
         } else if (i == 1) {
             System.out.println("大于");
         }
+    }
+
+    @Test
+    public void testDe() {
+        BigDecimal old = new BigDecimal("1.028923").setScale(2, RoundingMode.HALF_UP);
+        BigDecimal a = old.setScale(6, RoundingMode.HALF_UP);
+        System.out.println(a);
     }
 
 }

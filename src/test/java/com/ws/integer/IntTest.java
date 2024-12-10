@@ -33,6 +33,8 @@ public class IntTest extends TestCase {
         int b = 4;
         System.out.println(a % b);
     }
+
+
 }
 
 
